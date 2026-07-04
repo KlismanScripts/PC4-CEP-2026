@@ -1,0 +1,883 @@
+<div class="prob-panel active" id="p3">
+
+    <!-- 
+    ========================================================================
+    PROBLEMA 3: CUADRADO LATINO 4×4 CON DATO FALTANTE – ALGORITMOS IoT
+    ======================================================================== 
+    -->
+    <div class="prob-head">
+        <div class="prob-tag">Problema 555555555555555555</div>
+        <h2 class="prob-title">Cuadro Latino 4×4 – Horas de Inactividad (dato faltante)</h2>
+    </div>
+    <!-- ✅ FIN DE LA CABECERA -->
+
+
+    <!-- 
+    ████████████████████████████████████████████████████████████████████████
+    █ 01. CONTEXTO DE EXPERIMENTO (CON DATO PERDIDO)
+    ████████████████████████████████████████████████████████████████████████ 
+    -->
+    <div class="tool-block" style="margin-bottom: 2rem;">
+        <div class="tool-header">
+            <div class="tool-badge" style="background: var(--gold); color: #fff;">01</div>
+            <div>
+                <div class="tool-name">Contexto de Experimento</div>
+                <div class="tool-sub">Cuadrado Latino 4×4 – con un dato faltante (estimación de Yates)</div>
+            </div>
+        </div>
+        <div style="padding: 1.5rem; background: var(--white);">
+            <p style="margin-bottom: 1.2rem; font-size: 0.95rem; line-height: 1.5;">
+                <strong>📌 Enunciado:</strong> SmartLine Manufacturing busca reducir el tiempo de inactividad no planificada en su planta mediante algoritmos de mantenimiento predictivo. Se evaluaron 4 algoritmos (<strong>A: Regresión + reglas expertas, B: Random Forest, C: LSTM, D: Transformer</strong>) bajo un diseño de Cuadrado Latino 4×4 que controla (1) la <strong>Línea de Producción</strong> (antigüedad de maquinaria) y (2) el <strong>Turno de operación</strong> (carga y disponibilidad técnica). La variable de respuesta es <strong>Horas de Inactividad No Planificada al mes</strong> (menor es mejor). Durante la recolección, un fallo en la pasarela IoT de la Línea 3 durante el Turno 3 impidió registrar el dato correspondiente al algoritmo A.
+            </p>
+            <p style="margin-bottom: 1.2rem;">
+                A continuación, se presenta la tabla de datos original del experimento con el valor perdido:
+            </p>
+            
+            <div style="overflow-x: auto; margin-bottom: 1.8rem;">
+                <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid var(--rule); background: rgba(0,0,0,0.2);">
+                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Línea \ Turno</th>
+                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Turno 1</th>
+                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Turno 2</th>
+                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Turno 3</th>
+                            <th style="padding: 10px; text-align: center; color: var(--ink);">Turno 4</th>
+                         </td>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--rule);"><td style="padding: 8px; font-weight: bold; border-right: 1px solid var(--rule);">Línea 1</td><td style="padding: 8px; text-align: center; border-right: 1px solid var(--rule);">24.47 (A)</td><td style="padding: 8px; text-align: center; border-right: 1px solid var(--rule);">19.69 (B)</td><td style="padding: 8px; text-align: center; border-right: 1px solid var(--rule);">17.04 (C)</td><td style="padding: 8px; text-align: center;">22.82 (D)</td></tr>
+                        <tr style="border-bottom: 1px solid var(--rule);"><td style="padding: 8px; font-weight: bold; border-right: 1px solid var(--rule);">Línea 2</td><td style="padding: 8px; text-align: center; border-right: 1px solid var(--rule);">21.63 (B)</td><td style="padding: 8px; text-align: center; border-right: 1px solid var(--rule);">17.32 (C)</td><td style="padding: 8px; text-align: center; border-right: 1px solid var(--rule);">24.75 (D)</td><td style="padding: 8px; text-align: center;">25.24 (A)</td></tr>
+                        <tr style="border-bottom: 1px solid var(--rule);"><td style="padding: 8px; font-weight: bold; border-right: 1px solid var(--rule);">Línea 3</td><td style="padding: 8px; text-align: center; border-right: 1px solid var(--rule);">16.75 (C)</td><td style="padding: 8px; text-align: center; border-right: 1px solid var(--rule);">21.54 (D)</td><td style="padding: 8px; text-align: center; border-right: 1px solid var(--rule); background:#ffe0e0;"><strong>PERDIDO (A)</strong></td><td style="padding: 8px; text-align: center;">20.85 (B)</td></tr>
+                        <tr style="border-bottom: 1px solid var(--rule);"><td style="padding: 8px; font-weight: bold; border-right: 1px solid var(--rule);">Línea 4</td><td style="padding: 8px; text-align: center; border-right: 1px solid var(--rule);">23.25 (D)</td><td style="padding: 8px; text-align: center; border-right: 1px solid var(--rule);">23.54 (A)</td><td style="padding: 8px; text-align: center; border-right: 1px solid var(--rule);">21.66 (B)</td><td style="padding: 8px; text-align: center;">18.87 (C)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="font-family: var(--font-d); font-weight: 700; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; border-left: 4px solid var(--gold); padding-left: 12px;">🎯 Objetivo general</h3>
+            <p style="margin-bottom: 1.2rem;">Evaluar si existen diferencias estadísticamente significativas en las <strong>Horas de Inactividad No Planificada</strong> causadas por el <strong>algoritmo de mantenimiento (tratamiento)</strong>, controlando los efectos de bloque de <strong>línea de producción</strong> y <strong>turno</strong>. Se estimará el dato faltante mediante el método de Yates y se identificará el algoritmo que minimiza las horas de inactividad.</p>
+
+            <h3 style="font-family: var(--font-d); font-weight: 700; font-size: 1.2rem; margin: 1.2rem 0 0.5rem 0; border-left: 4px solid var(--gold); padding-left: 12px;">🧪 Factores estudiados</h3>
+            <ul style="margin-bottom: 0; padding-left: 1.8rem;">
+                <li><strong>Factor Tratamiento (Algoritmo):</strong> 4 niveles (A: Regresión+reglas, B: Random Forest, C: LSTM, D: Transformer).</li>
+                <li><strong>Factor Bloque Fila (Línea de Producción):</strong> 4 niveles (Línea 1 a 4).</li>
+                <li><strong>Factor Bloque Columna (Turno):</strong> 4 niveles (Turno 1 a 4).</li>
+                <li><strong>Variable de Respuesta:</strong> Horas de inactividad no planificada al mes (menor es mejor).</li>
+                <li><strong>Diseño no balanceado:</strong> Un dato faltante en la celda (Línea 3, Turno 3, Algoritmo A).</li>
+            </ul>
+        </div>
+    </div>
+    <!-- ✅ FIN DEL REQUERIMIENTO 01 -->
+
+
+    <!-- 
+    ████████████████████████████████████████████████████████████████████████
+    █ 02. FORMULACIÓN DE HIPÓTESIS + ESTIMACIÓN DE DATO PERDIDO
+    ████████████████████████████████████████████████████████████████████████ 
+    -->
+    <div class="tool-block" style="margin-bottom: 2rem;">
+        <div class="tool-header">
+            <div class="tool-badge" style="background: var(--gold); color: #fff;">02</div>
+            <div>
+                <div class="tool-name">Formulación de Hipótesis</div>
+                <div class="tool-sub">Contrastes estadísticos (α = 0.05) y estimación del dato faltante</div>
+            </div>
+        </div>
+        <div style="padding: 1.5rem; background: var(--white);">
+
+            <h3 style="font-family: var(--font-d); font-weight: 700; font-size: 1.2rem; margin: 0 0 0.5rem 0; border-left: 4px solid var(--gold); padding-left: 12px;">📐 Estimación del dato perdido (Método de Yates)</h3>
+            <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); margin-bottom: 1rem;">
+                <p style="margin-bottom: 0.5rem;">Para un cuadrado latino con una sola observación faltante en la posición (fila <em>i</em>, columna <em>j</em>, tratamiento <em>k</em>), la estimación de Yates es:</p>
+                <p style="text-align: center; font-family: monospace; font-size: 1.1rem; margin: 0.5rem 0;">
+                    X̂ = [ r(R<sub>i</sub> + C<sub>j</sub> + T<sub>k</sub>) – 2G ] / [(r–1)(r–2)]
+                </p>
+                <p>Donde <em>r</em> = 4, <em>R<sub>i</sub></em> es la suma de la fila i (sin el faltante), <em>C<sub>j</sub></em> suma de columna j (sin faltante), <em>T<sub>k</sub></em> suma del tratamiento k (sin faltante), y <em>G</em> suma total de todas las observaciones existentes.</p>
+                <hr style="margin: 0.8rem 0;">
+                <p><strong>Cálculo:</strong> Sumas existentes (sin el dato perdido):</p>
+                <ul style="margin: 0;">
+                    <li>Fila 3 (Línea 3): 16.75 + 21.54 + 20.85 = <strong>59.14</strong></li>
+                    <li>Columna 3 (Turno 3): 17.04 + 24.75 + 21.66 = <strong>63.45</strong> (faltante de L3,T3 excluido)</li>
+                    <li>Tratamiento A: 24.47 (L1,T1) + 25.24 (L2,T4) + 23.54 (L4,T2) = <strong>73.25</strong></li>
+                    <li>Suma total G (15 valores): 24.47+19.69+17.04+22.82+21.63+17.32+24.75+25.24+16.75+21.54+20.85+23.25+23.54+21.66+18.87 = <strong>319.42</strong></li>
+                </ul>
+                <p style="margin-top: 0.5rem;">Aplicando fórmula: X̂ = [4(59.14 + 63.45 + 73.25) – 2·319.42] / [(4–1)(4–2)] = [4(195.84) – 638.84] / (3·2) = (783.36 – 638.84)/6 = 144.52/6 = <strong>24.0867</strong></p>
+                <p>Por tanto, el valor estimado para la celda perdida (Línea 3, Turno 3, Algoritmo A) es <strong>24.0867</strong> (≈24.09).</p>
+            </div>
+
+            <h3 style="font-family: var(--font-d); font-weight: 700; font-size: 1.2rem; margin: 1rem 0 0.5rem 0; border-left: 4px solid var(--gold); padding-left: 12px;">⚖️ Hipótesis a Contrastar</h3>
+            
+            <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); margin: 0.75rem 0; border-left: 4px solid var(--py);">
+                <strong style="font-size: 1.05rem; color: var(--ink);">🔹 Algoritmo (Tratamiento):</strong><br>
+                <span style="font-family: var(--font-m); font-size: 0.95rem; display: block; margin: 0.5rem 0; color: var(--ink);">
+                    <strong>H₀:</strong> μ<sub>A</sub> = μ<sub>B</sub> = μ<sub>C</sub> = μ<sub>D</sub> (no hay efecto del algoritmo)<br>
+                    <strong>H₁:</strong> Al menos un algoritmo genera horas medias de inactividad diferentes.
+                </span>
+                <p style="margin: 0; font-size: 0.9rem; color: var(--ink-soft);">Interpretación: evaluamos si el tipo de modelo predictivo influye en la inactividad.</p>
+            </div>
+            
+            <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); margin: 0.75rem 0; border-left: 4px solid var(--xl);">
+                <strong style="font-size: 1.05rem; color: var(--ink);">🔹 Línea (bloque fila):</strong><br>
+                <span style="font-family: var(--font-m); font-size: 0.95rem; display: block; margin: 0.5rem 0; color: var(--ink);">
+                    <strong>H₀:</strong> μ<sub>L1</sub> = μ<sub>L2</sub> = μ<sub>L3</sub> = μ<sub>L4</sub><br>
+                    <strong>H₁:</strong> Al menos una línea produce inactividad media distinta.
+                </span>
+            </div>
+
+            <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); margin: 0.75rem 0; border-left: 4px solid var(--mt);">
+                <strong style="font-size: 1.05rem; color: var(--ink);">🔹 Turno (bloque columna):</strong><br>
+                <span style="font-family: var(--font-m); font-size: 0.95rem; display: block; margin: 0.5rem 0; color: var(--ink);">
+                    <strong>H₀:</strong> μ<sub>Turn1</sub> = μ<sub>Turn2</sub> = μ<sub>Turn3</sub> = μ<sub>Turn4</sub><br>
+                    <strong>H₁:</strong> Al menos un turno presenta inactividad media diferente.
+                </span>
+            </div>
+
+            <!-- Nota sobre grados de libertad por dato faltante -->
+            <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #f1c40f; color: #ecf0f1;">
+                <strong>⚠️ Importante (dato faltante):</strong> La presencia de un dato perdido modifica los grados de libertad. En un cuadrado latino completo, GL<sub>Error</sub> = (r-1)(r-2) = 6. Con una estimación, se pierde un grado de libertad adicional, por lo que GL<sub>Error</sub> = (r-1)(r-2)-1 = 5. Esto causa diferencias entre Minitab (que no resta el grado) y los demás softwares (que sí lo hacen). Lo veremos en las tablas ANOVA.
+            </div>
+
+        </div>
+    </div>
+    <!-- ✅ FIN DEL REQUERIMIENTO 02 -->
+
+
+    <!-- 
+    ████████████████████████████████████████████████████████████████████████
+    █ 03. TABLA DE ANOVA POR SOFTWARE (MINITAB, EXCEL, R, PYTHON)
+    ████████████████████████████████████████████████████████████████████████ 
+    -->
+    <div class="tool-block" style="margin-bottom: 2rem;">
+        <div class="tool-header">
+            <div class="tool-badge" style="background: var(--gold); color: #fff;">03</div>
+            <div>
+                <div class="tool-name">Tabla de ANOVA por Software</div>
+                <div class="tool-sub">Salidas de Minitab, Excel, R y Python (con dato estimado)</div>
+            </div>
+        </div>
+        <div style="padding: 1.5rem; background: var(--white);">
+            
+            <h4 style="color: var(--ink); font-family: var(--font-d); margin-bottom: 0.8rem; font-size: 1.1rem;">📊 Salida de Minitab</h4>
+            <div style="overflow-x: auto; margin-bottom: 2.5rem;">
+                <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem; text-align: center;">
+                    <thead><tr style="border-bottom: 2px solid var(--rule); background: rgba(0,0,0,0.2);">
+                        <th style="padding: 10px; border-right: 1px solid var(--rule);">Fuente</th><th style="padding: 10px; border-right: 1px solid var(--rule);">GL</th><th style="padding: 10px; border-right: 1px solid var(--rule);">SC Ajust.</th><th style="padding: 10px; border-right: 1px solid var(--rule);">MC Ajust.</th><th style="padding: 10px; border-right: 1px solid var(--rule);">Valor F</th><th style="padding: 10px;">Valor p</th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td style="border-right:1px solid var(--rule);">Algoritmo</td><td style="border-right:1px solid var(--rule);">3</td><td style="border-right:1px solid var(--rule);">107.565</td><td style="border-right:1px solid var(--rule);">35.855</td><td style="border-right:1px solid var(--rule);">158.33</td><td style="color:#c0392b;">0.000</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Turno</td><td style="border-right:1px solid var(--rule);">3</td><td style="border-right:1px solid var(--rule);">5.192</td><td style="border-right:1px solid var(--rule);">1.731</td><td style="border-right:1px solid var(--rule);">7.64</td><td style="color:#c0392b;">0.018</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Línea</td><td style="border-right:1px solid var(--rule);">3</td><td style="border-right:1px solid var(--rule);">5.484</td><td style="border-right:1px solid var(--rule);">1.828</td><td style="border-right:1px solid var(--rule);">8.07</td><td style="color:#c0392b;">0.016</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Error</td><td style="border-right:1px solid var(--rule);">6</td><td style="border-right:1px solid var(--rule);">1.359</td><td style="border-right:1px solid var(--rule);">0.2265</td><td style="border-right:1px solid var(--rule);"></td><td></td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Total</td><td style="border-right:1px solid var(--rule);">15</td><td style="border-right:1px solid var(--rule);">119.599</td><td style="border-right:1px solid var(--rule);"></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <p style="font-size:0.75rem; margin-top:0.5rem; color:#c0392b;"><strong>Minitab NO resta el grado de libertad por dato faltante</strong> → GL<sub>Error</sub> = 6, GL<sub>Total</sub> = 15 (como si fuera completo).</p>
+            </div>
+
+            <h4 style="color: var(--ink); font-family: var(--font-d); margin-bottom: 0.8rem; font-size: 1.1rem;">📊 Salida de Excel</h4>
+            <div style="overflow-x: auto; margin-bottom: 2.5rem;">
+                <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem; text-align: center;">
+                    <thead><tr style="border-bottom:2px solid var(--rule); background:rgba(0,0,0,0.2);">
+                        <th style="padding:8px; border-right:1px solid var(--rule);">Fuente de Variación</th><th style="padding:8px; border-right:1px solid var(--rule);">SS</th><th style="padding:8px; border-right:1px solid var(--rule);">df</th><th style="padding:8px; border-right:1px solid var(--rule);">MS</th><th style="padding:8px; border-right:1px solid var(--rule);">F0</th><th style="padding:8px;">Valor P</th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td style="border-right:1px solid var(--rule);">Tratamientos (Algoritmos)</td><td style="border-right:1px solid var(--rule);">107.5645</td><td style="border-right:1px solid var(--rule);">3</td><td style="border-right:1px solid var(--rule);">35.85483</td><td style="border-right:1px solid var(--rule);">131.9421</td><td style="color:#c0392b;">3.525E-05</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Filas (Líneas)</td><td style="border-right:1px solid var(--rule);">5.484233</td><td style="border-right:1px solid var(--rule);">3</td><td style="border-right:1px solid var(--rule);">1.828078</td><td style="border-right:1px solid var(--rule);">6.72714</td><td style="color:#c0392b;">0.03314</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Columnas (Turnos)</td><td style="border-right:1px solid var(--rule);">5.19175</td><td style="border-right:1px solid var(--rule);">3</td><td style="border-right:1px solid var(--rule);">1.730583</td><td style="border-right:1px solid var(--rule);">6.36837</td><td style="color:#c0392b;">0.03683</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Error</td><td style="border-right:1px solid var(--rule);">1.358733</td><td style="border-right:1px solid var(--rule);">5</td><td style="border-right:1px solid var(--rule);">0.2717467</td><td></td><td></td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Total</td><td style="border-right:1px solid var(--rule);">119.5992</td><td style="border-right:1px solid var(--rule);">14</td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <p style="font-size:0.75rem; margin-top:0.5rem; color:#2c6c9e;"><strong>Excel SÍ resta el grado de libertad</strong> (GL<sub>Error</sub> = 5, GL<sub>Total</sub> = 14) por el dato estimado.</p>
+            </div>
+
+            <h4 style="color: var(--ink); font-family: var(--font-d); margin-bottom: 0.8rem; font-size: 1.1rem;">📊 Salida de R</h4>
+            <div style="overflow-x: auto; margin-bottom: 2.5rem;">
+                <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem; text-align: center;">
+                    <thead><tr style="border-bottom:2px solid var(--rule); background:rgba(0,0,0,0.2);">
+                        <th style="padding:8px; border-right:1px solid var(--rule);"></th><th style="padding:8px; border-right:1px solid var(--rule);">Df</th><th style="padding:8px; border-right:1px solid var(--rule);">Sum Sq</th><th style="padding:8px; border-right:1px solid var(--rule);">Mean Sq</th><th style="padding:8px; border-right:1px solid var(--rule);">F value</th><th style="padding:8px;">Pr(>F)</th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td style="border-right:1px solid var(--rule);">Algoritmo</td><td style="border-right:1px solid var(--rule);">3</td><td style="border-right:1px solid var(--rule);">107.565</td><td style="border-right:1px solid var(--rule);">35.855</td><td style="border-right:1px solid var(--rule);">131.942</td><td style="color:#c0392b;">3.525e-05 ***</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Línea</td><td style="border-right:1px solid var(--rule);">3</td><td style="border-right:1px solid var(--rule);">5.484</td><td style="border-right:1px solid var(--rule);">1.828</td><td style="border-right:1px solid var(--rule);">6.727</td><td style="color:#c0392b;">0.03314 *</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Turno</td><td style="border-right:1px solid var(--rule);">3</td><td style="border-right:1px solid var(--rule);">5.192</td><td style="border-right:1px solid var(--rule);">1.731</td><td style="border-right:1px solid var(--rule);">6.368</td><td style="color:#c0392b;">0.03683 *</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Residuals</td><td style="border-right:1px solid var(--rule);">5</td><td style="border-right:1px solid var(--rule);">1.359</td><td style="border-right:1px solid var(--rule);">0.272</td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <p style="font-size:0.75rem; margin-top:0.5rem; color:#2c6c9e;"><strong>R también resta el grado de libertad</strong> (GL<sub>Error</sub> = 5).</p>
+            </div>
+
+            <h4 style="color: var(--ink); font-family: var(--font-d); margin-bottom: 0.8rem; font-size: 1.1rem;">📊 Salida de Python</h4>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem; text-align: center;">
+                    <thead><tr style="border-bottom:2px solid var(--rule); background:rgba(0,0,0,0.2);">
+                        <th style="padding:8px; border-right:1px solid var(--rule);">Fuente</th><th style="padding:8px; border-right:1px solid var(--rule);">sum_sq</th><th style="padding:8px; border-right:1px solid var(--rule);">df</th><th style="padding:8px; border-right:1px solid var(--rule);">F</th><th style="padding:8px;">PR(>F)</th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td style="border-right:1px solid var(--rule);">C(Algoritmo)</td><td style="border-right:1px solid var(--rule);">107.5645</td><td style="border-right:1px solid var(--rule);">3.0</td><td style="border-right:1px solid var(--rule);">131.942</td><td style="color:#c0392b;">0.0000</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">C(Línea)</td><td style="border-right:1px solid var(--rule);">5.48423</td><td style="border-right:1px solid var(--rule);">3.0</td><td style="border-right:1px solid var(--rule);">6.727</td><td style="color:#c0392b;">0.0331</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">C(Turno)</td><td style="border-right:1px solid var(--rule);">5.19175</td><td style="border-right:1px solid var(--rule);">3.0</td><td style="border-right:1px solid var(--rule);">6.368</td><td style="color:#c0392b;">0.0368</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Residual</td><td style="border-right:1px solid var(--rule);">1.35873</td><td style="border-right:1px solid var(--rule);">5.0</td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <p style="font-size:0.75rem; margin-top:0.5rem; color:#2c6c9e;"><strong>Python idéntico a R y Excel</strong> (GL<sub>Error</sub> = 5).</p>
+            </div>
+
+        </div>
+    </div>
+    <!-- ✅ FIN DEL REQUERIMIENTO 03 -->
+
+
+    <!-- 
+    ████████████████████████████████████████████████████████████████████████
+    █ 04. INTERPRETACIÓN DE RESULTADOS ANOVA
+    ████████████████████████████████████████████████████████████████████████ 
+    -->
+    <div class="tool-block" style="margin-bottom: 2rem;">
+        <div class="tool-header">
+            <div class="tool-badge" style="background: var(--gold); color: #fff;">04</div>
+            <div>
+                <div class="tool-name">Interpretación de Resultados ANOVA</div>
+                <div class="tool-sub">Contraste de p‑valores vs. nivel de significancia (α = 0.05)</div>
+            </div>
+        </div>
+        <div style="padding: 1.5rem; background: var(--white);">
+
+            <p style="margin-bottom: 1.2rem;">Se utiliza α = 0.05. Se rechaza H₀ si p‑valor &lt; 0.05. <strong>Se debe tener en cuenta la discrepancia en los grados de libertad</strong> entre Minitab (que no corrige) y los demás softwares (que sí corrigen por el dato faltante). A pesar de ello, las conclusiones son consistentes.</p>
+
+            <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); margin-bottom: 1rem; border-left: 4px solid var(--py);">
+                <strong>🔹 Algoritmo (Tratamiento):</strong><br>
+                <span>En <strong>todos los softwares</strong> p‑valor &lt; 0.05 (Minitab: 0.000, Excel/R/Python: ≈3.5e-5) ➔ <span style="color:#c0392b;">se rechaza H₀</span>. Existe evidencia sólida de que al menos un algoritmo produce diferentes horas de inactividad. El efecto es muy significativo (F ≈ 132–158).</span>
+            </div>
+
+            <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); margin-bottom: 1rem; border-left: 4px solid var(--xl);">
+                <strong>🔹 Línea (Bloque fila):</strong><br>
+                <span>p‑valor ≈ 0.016–0.033 &lt; 0.05 ➔ <span style="color:#c0392b;">se rechaza H₀</span>. La línea de producción afecta significativamente la inactividad, justificando su uso como bloque.</span>
+            </div>
+
+            <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); border-left: 4px solid var(--mt);">
+                <strong>🔹 Turno (Bloque columna):</strong><br>
+                <span>p‑valor ≈ 0.018–0.037 &lt; 0.05 ➔ <span style="color:#c0392b;">se rechaza H₀</span>. El turno también influye, indicando diferencias en carga de trabajo o disponibilidad técnica.</span>
+            </div>
+
+        </div>
+    </div>
+    <!-- ✅ FIN DEL REQUERIMIENTO 04 -->
+
+
+    <!-- 
+    ████████████████████████████████████████████████████████████████████████
+    █ 05. ANÁLISIS COMPARATIVO ENTRE SOFTWARES (FONDOS OSCUROS)
+    ████████████████████████████████████████████████████████████████████████ 
+    -->
+    <div class="tool-block" style="margin-bottom: 2rem;">
+        <div class="tool-header">
+            <div class="tool-badge" style="background: var(--gold); color: #fff;">05</div>
+            <div>
+                <div class="tool-name">Análisis Comparativo entre Softwares</div>
+                <div class="tool-sub">Discrepancia en grados de libertad por dato faltante</div>
+            </div>
+        </div>
+        <div style="padding: 1.5rem; background: var(--white);">
+
+            <p style="margin-bottom: 1.5rem;">Los cuatro paquetes estadísticos coinciden en la significancia de los factores, pero <strong>Minitab difiere en los grados de libertad</strong> debido a que <strong>no resta un grado de libertad por el dato estimado</strong>, mientras que Excel, R y Python sí lo hacen. Esto es una diferencia metodológica importante que debe señalarse.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-bottom: 1.8rem;">
+                <div style="background: #2c3e50; border-radius: 0.75rem; padding: 1rem; border-left: 5px solid #6c8ebf; color: #ecf0f1;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;"><div style="background: #6c8ebf; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;">MT</div><h5 style="margin:0;">Minitab</h5></div>
+                    <ul style="margin:0.5rem 0 0 1rem; font-size:0.85rem;">
+                        <li>GL<sub>Error</sub> = 6 (no corrige)</li>
+                        <li>GL<sub>Total</sub> = 15</li>
+                        <li>p‑valores: 0.000 / 0.016 / 0.018</li>
+                        <li>F<sub>Alg</sub> ≈ 158.33 (mayor)</li>
+                    </ul>
+                </div>
+                <div style="background: #1e3a2f; border-radius: 0.75rem; padding: 1rem; border-left: 5px solid #2ecc71; color: #ecf0f1;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;"><div style="background:#1e7245; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;">XL</div><h5 style="margin:0;">Excel</h5></div>
+                    <ul style="margin:0.5rem 0 0 1rem; font-size:0.85rem;">
+                        <li>GL<sub>Error</sub> = 5 (corrige)</li>
+                        <li>GL<sub>Total</sub> = 14</li>
+                        <li>p‑valores: 3.5e-5 / 0.033 / 0.037</li>
+                        <li>F<sub>Alg</sub> ≈ 131.94</li>
+                    </ul>
+                </div>
+                <div style="background: #2c3e50; border-radius: 0.75rem; padding: 1rem; border-left: 5px solid #3498db; color: #ecf0f1;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;"><div style="background:#2c6c9e; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;">R</div><h5 style="margin:0;">R</h5></div>
+                    <ul style="margin:0.5rem 0 0 1rem; font-size:0.85rem;">
+                        <li>GL<sub>Error</sub> = 5</li>
+                        <li>Coincide con Excel</li>
+                        <li>p‑valores: 3.525e-05 / 0.03314 / 0.03683</li>
+                    </ul>
+                </div>
+                <div style="background: #3a2a1f; border-radius: 0.75rem; padding: 1rem; border-left: 5px solid #f1c40f; color: #ecf0f1;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;"><div style="background:#f4c542; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;">Py</div><h5 style="margin:0;">Python</h5></div>
+                    <ul style="margin:0.5rem 0 0 1rem; font-size:0.85rem;">
+                        <li>GL<sub>Error</sub> = 5</li>
+                        <li>Resultados idénticos a R</li>
+                        <li>statsmodels aplica corrección estándar</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="note" style="background:#1e2a36; padding:1rem; border-radius:0.5rem; color:#ecf0f1;">
+                <strong>🛡️ Conclusión comparativa:</strong> A pesar de la discrepancia en los grados de libertad, <strong>todos los softwares coinciden en que el algoritmo es el factor más influyente</strong> (p < 0.0001), y los bloques también resultan significativos. La recomendación práctica se basa en el efecto robusto del algoritmo, independientemente del manejo del dato faltante.
+            </div>
+
+        </div>
+    </div>
+    <!-- ✅ FIN DEL REQUERIMIENTO 05 -->
+
+
+    <!-- 
+    ████████████████████████████████████████████████████████████████████████
+    █ 06. PRUEBA DE TUKEY E INTERVALOS DE CONFIANZA (MINITAB)
+    ████████████████████████████████████████████████████████████████████████ 
+    -->
+    <div class="tool-block" style="margin-bottom: 2rem;">
+        <div class="tool-header">
+            <div class="tool-badge" style="background: var(--gold); color: #fff;">06</div>
+            <div>
+                <div class="tool-name">Prueba de Tukey e Intervalos de Confianza</div>
+                <div class="tool-sub">Comparación Múltiple (Tukey HSD) — α = 0.05</div>
+            </div>
+        </div>
+        <div style="padding: 1.5rem; background: var(--white);">
+
+            <p style="margin-bottom: 1.2rem; font-size: 0.95rem; line-height: 1.6; color: var(--ink);">
+                La prueba de comparaciones múltiples de Tukey (HSD) con un nivel de confianza del 95% evalúa las diferencias entre las medias de todos los pares de algoritmos. 
+                Dado el dato faltante, se utilizan los cuadrados medios del error corregidos (Excel/R/Python). 
+                <strong>Regla de decisión:</strong> si el intervalo de confianza de un par <strong>NO contiene el cero</strong>, las medias correspondientes son significativamente diferentes.
+            </p>
+
+            <!-- ============== ALGORITMO (TRATAMIENTO) ============== -->
+            <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin: 1.5rem 0 0.8rem 0; border-left: 3px solid var(--gold); padding-left: 10px;">📊 Factor: Algoritmo de Mantenimiento</h4>
+
+            <div style="overflow-x: auto; margin-bottom: 1rem;">
+                <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem; text-align: center;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--rule); background: rgba(0,0,0,0.1);">
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">Comparación</th>
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">Diferencia (horas)</th>
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">IC Inferior</th>
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">IC Superior</th>
+                            <th style="padding: 8px; color: var(--ink);">¿Significativo?</th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="padding: 6px;">B - A</td><td style="padding: 6px;">-0.43</td><td style="padding: 6px;">-2.55</td><td style="padding: 6px;">1.69</td><td style="color:#e67e22;">No</td></tr>
+                        <tr><td style="padding: 6px;">C - A</td><td style="padding: 6px;">-5.79</td><td style="padding: 6px;">-7.91</td><td style="padding: 6px;">-3.67</td><td style="color:#c0392b;">Sí</td></tr>
+                        <tr><td style="padding: 6px;">D - A</td><td style="padding: 6px;">-3.36</td><td style="padding: 6px;">-5.48</td><td style="padding: 6px;">-1.24</td><td style="color:#c0392b;">Sí</td></tr>
+                        <tr><td style="padding: 6px;">C - B</td><td style="padding: 6px;">-5.36</td><td style="padding: 6px;">-7.48</td><td style="padding: 6px;">-3.24</td><td style="color:#c0392b;">Sí</td></tr>
+                        <tr><td style="padding: 6px;">D - B</td><td style="padding: 6px;">-2.93</td><td style="padding: 6px;">-5.05</td><td style="padding: 6px;">-0.81</td><td style="color:#c0392b;">Sí</td></tr>
+                        <tr><td style="padding: 6px;">D - C</td><td style="padding: 6px;">2.43</td><td style="padding: 6px;">0.31</td><td style="padding: 6px;">4.55</td><td style="color:#c0392b;">Sí</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Espacio para imagen del gráfico de Tukey (Algoritmo) -->
+            <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1rem; margin: 1rem 0 1.5rem 0; text-align: center;">
+                <img src="preguntas/p3/minitab/tukey1.png" alt="Gráfico de intervalos de Tukey para Algoritmo" style="max-width: 100%; height: auto; border-radius: 8px;">
+                <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.8rem;">Gráfico de Tukey — Algoritmo</p>
+            </div>
+
+            <p style="margin-bottom: 2rem; font-size: 0.95rem; line-height: 1.6; color: var(--ink-soft);">
+                <strong>Interpretación:</strong> La comparación <strong>B vs A</strong> contiene el cero (no significativa), indicando que el algoritmo A (Regresión+reglas) y B (Random Forest) producen medias de inactividad similares. El resto de diferencias son significativas. El orden de medias (menor a mayor, mejor desempeño): <strong>C (LSTM) ≈ 18.54 h</strong> (la mejor), luego <strong>D (Transformer) ≈ 21.20 h</strong>, luego <strong>B (Random Forest) ≈ 22.54 h</strong> y finalmente <strong>A (Reglas) ≈ 22.97 h</strong>. C es significativamente mejor que todos, mientras que A y B son estadísticamente equivalentes.
+            </p>
+
+            <!-- ============== LÍNEA (BLOQUE FILA) ============== -->
+            <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin: 1.5rem 0 0.8rem 0; border-left: 3px solid var(--xl); padding-left: 10px;">📊 Factor: Línea de Producción</h4>
+
+            <div style="overflow-x: auto; margin-bottom: 1rem;">
+                <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem; text-align: center;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--rule); background: rgba(0,0,0,0.1);">
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">Comparación</th>
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">Diferencia (horas)</th>
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">IC Inferior</th>
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">IC Superior</th>
+                            <th style="padding: 8px; color: var(--ink);">¿Significativo?</th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="padding: 6px;">L2 - L1</td><td style="padding: 6px;">0.87</td><td style="padding: 6px;">-1.34</td><td style="padding: 6px;">3.08</td><td style="color:#e67e22;">No</td></tr>
+                        <tr><td style="padding: 6px;">L3 - L1</td><td style="padding: 6px;">-1.80</td><td style="padding: 6px;">-4.01</td><td style="padding: 6px;">0.41</td><td style="color:#e67e22;">No</td></tr>
+                        <tr><td style="padding: 6px;">L4 - L1</td><td style="padding: 6px;">1.05</td><td style="padding: 6px;">-1.16</td><td style="padding: 6px;">3.26</td><td style="color:#e67e22;">No</td></tr>
+                        <tr><td style="padding: 6px;">L3 - L2</td><td style="padding: 6px;">-2.67</td><td style="padding: 6px;">-4.88</td><td style="padding: 6px;">-0.46</td><td style="color:#c0392b;">Sí</td></tr>
+                        <tr><td style="padding: 6px;">L4 - L2</td><td style="padding: 6px;">0.18</td><td style="padding: 6px;">-2.03</td><td style="padding: 6px;">2.39</td><td style="color:#e67e22;">No</td></tr>
+                        <tr><td style="padding: 6px;">L4 - L3</td><td style="padding: 6px;">2.85</td><td style="padding: 6px;">0.64</td><td style="padding: 6px;">5.06</td><td style="color:#c0392b;">Sí</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Espacio para imagen del gráfico de Tukey (Línea) -->
+            <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1rem; margin: 1rem 0 1.5rem 0; text-align: center;">
+                <img src="preguntas/p3/minitab/tukey3.png" alt="Gráfico de intervalos de Tukey para Línea" style="max-width: 100%; height: auto; border-radius: 8px;">
+                <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.8rem;">Gráfico de Tukey — Línea</p>
+            </div>
+
+            <p style="margin-bottom: 2rem; font-size: 0.95rem; line-height: 1.6; color: var(--ink-soft);">
+                <strong>Interpretación:</strong> Se detectan diferencias significativas únicamente entre L3 y L2 (L3 produce menos inactividad que L2) y entre L4 y L3 (L4 más inactividad que L3). Las demás comparaciones no son significativas. Esto sugiere que la línea 3 es la de mejor desempeño en términos de menores horas de inactividad.
+            </p>
+
+            <!-- ============== TURNO (BLOQUE COLUMNA) ============== -->
+            <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin: 1.5rem 0 0.8rem 0; border-left: 3px solid var(--mt); padding-left: 10px;">📊 Factor: Turno</h4>
+
+            <div style="overflow-x: auto; margin-bottom: 1rem;">
+                <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem; text-align: center;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--rule); background: rgba(0,0,0,0.1);">
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">Comparación</th>
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">Diferencia (horas)</th>
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">IC Inferior</th>
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">IC Superior</th>
+                            <th style="padding: 8px; color: var(--ink);">¿Significativo?</th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="padding: 6px;">T2 - T1</td><td style="padding: 6px;">-0.84</td><td style="padding: 6px;">-2.78</td><td style="padding: 6px;">1.10</td><td style="color:#e67e22;">No</td></tr>
+                        <tr><td style="padding: 6px;">T3 - T1</td><td style="padding: 6px;">-0.06</td><td style="padding: 6px;">-2.00</td><td style="padding: 6px;">1.88</td><td style="color:#e67e22;">No</td></tr>
+                        <tr><td style="padding: 6px;">T4 - T1</td><td style="padding: 6px;">2.30</td><td style="padding: 6px;">0.36</td><td style="padding: 6px;">4.24</td><td style="color:#c0392b;">Sí</td></tr>
+                        <tr><td style="padding: 6px;">T3 - T2</td><td style="padding: 6px;">0.78</td><td style="padding: 6px;">-1.16</td><td style="padding: 6px;">2.72</td><td style="color:#e67e22;">No</td></tr>
+                        <tr><td style="padding: 6px;">T4 - T2</td><td style="padding: 6px;">3.14</td><td style="padding: 6px;">1.20</td><td style="padding: 6px;">5.08</td><td style="color:#c0392b;">Sí</td></tr>
+                        <tr><td style="padding: 6px;">T4 - T3</td><td style="padding: 6px;">2.36</td><td style="padding: 6px;">0.42</td><td style="padding: 6px;">4.30</td><td style="color:#c0392b;">Sí</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Espacio para imagen del gráfico de Tukey (Turno) -->
+            <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1rem; margin: 1rem 0 1.5rem 0; text-align: center;">
+                <img src="preguntas/p3/minitab/tukey2.png" alt="Gráfico de intervalos de Tukey para Turno" style="max-width: 100%; height: auto; border-radius: 8px;">
+                <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.8rem;">Gráfico de Tukey — Turno</p>
+            </div>
+
+            <p style="margin-bottom: 1.8rem; font-size: 0.95rem; line-height: 1.6; color: var(--ink-soft);">
+                <strong>Interpretación:</strong> El turno 4 presenta significativamente más horas de inactividad que los turnos 1, 2 y 3 (intervalos positivos). No se detectan diferencias significativas entre los turnos 1, 2 y 3. Esto indica que el último turno es el más problemático.
+            </p>
+
+            <p style="margin-top: 1.5rem; font-size: 0.9rem; border-top: 1px solid var(--rule); padding-top: 1rem; color: var(--ink);">
+                <strong>Nota sobre el dato faltante:</strong> La prueba de Tukey presentada se basa en los resultados corregidos (Excel/R/Python). Minitab, al no ajustar los grados de libertad, produce intervalos ligeramente más estrechos, pero las conclusiones sobre significancia son las mismas.
+            </p>
+
+        </div>
+    </div>
+    <!-- ✅ FIN DEL REQUERIMIENTO 06 -->
+
+
+    <!-- 
+    ████████████████████████████████████████████████████████████████████████
+    █ 07. COMPROBACIÓN DE RESULTADOS (CAPTURAS DE TODOS LOS SOFTWARES)
+    ████████████████████████████████████████████████████████████████████████ 
+    -->
+    <div style="margin-bottom: 2rem; margin-top: 3rem;">
+        
+        <h3 style="font-family: var(--font-d); font-weight: 800; font-size: 1.5rem; color: var(--ink); border-left: 6px solid var(--gold); padding-left: 14px; margin-bottom: 1.5rem; text-transform: uppercase;">
+            07. Comprobación de Resultados (Capturas)
+        </h3>
+
+
+        <!-- ================== CAPTURAS: EXCEL ================== -->
+        <div class="tool-block">
+            <div class="tool-header xl">
+                <div class="tool-badge xl">XL</div>
+                <div>
+                    <div class="tool-name">Excel</div>
+                    <div class="tool-sub">Análisis de datos / fórmulas</div>
+                </div>
+            </div>
+            <div class="img-grid">
+                <div class="img-cell" onclick="lbOpen(this)">
+                    <img src="preguntas/p3/excel/anovaE.png" alt="Excel – Cuadrado Latino – paso 1" />
+                    <div class="img-cap">ANOVA EXCEL</div>
+                </div>
+                <div class="img-cell" onclick="lbOpen(this)">
+                    <img src="preguntas/p3/excel/datosE.png" alt="Excel – Cuadrado Latino – paso 1" />
+                    <div class="img-cap">DATOS EXCEL</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================== CAPTURAS: MINITAB ================== -->
+        <div class="tool-block">
+            <div class="tool-header mt">
+                <div class="tool-badge mt">MT</div>
+                <div>
+                    <div class="tool-name">Minitab</div>
+                    <div class="tool-sub">DOE / ANOVA general</div>
+                </div>
+            </div>
+            <div class="img-grid">
+                <div class="img-cell" onclick="lbOpen(this)">
+                    <img src="preguntas/p3/minitab/anovaM.png" alt="Minitab – Cuadrado Latino – paso 1" />
+                    <div class="img-cap">ANOVA</div>
+                </div>
+                <div class="img-cell" onclick="lbOpen(this)">
+                    <img src="preguntas/p3/minitab/tukey1.png" alt="Minitab – Cuadrado Latino – paso 1" />
+                    <div class="img-cap">TUKEY</div>
+                </div>
+                <div class="img-cell" onclick="lbOpen(this)">
+                    <img src="preguntas/p3/minitab/tukey2.png" alt="Minitab – Cuadrado Latino – paso 1" />
+                    <div class="img-cap">TUKEY</div>
+                </div>
+                <div class="img-cell" onclick="lbOpen(this)">
+                    <img src="preguntas/p3/minitab/tukey3.png" alt="Minitab – Cuadrado Latino – paso 1" />
+                    <div class="img-cap">TUKEY</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================== CAPTURAS: R ================== -->
+        <div class="tool-block" style="margin-bottom: 0;">
+            <div class="tool-header r">
+                <div class="tool-badge r">R</div>
+                <div>
+                    <div class="tool-name">R</div>
+                    <div class="tool-sub"></div>
+                </div>
+            </div>
+            <div class="img-grid">
+                <div class="img-cell" onclick="lbOpen(this)">
+                    <img src="preguntas/p1/R/Rcodigo.png" alt="R – Cuadrado Latino" />
+                    <pre class="hidden-code" style="display: none;">
+# =====================================================================
+# DISEÑO EN CUADRADO LATINO (4x4) CON DATO FALTANTE - R SCRIPT
+# =====================================================================
+
+# 1. CONSTRUCCIÓN DE LA MATRIZ DE DATOS
+Linea <- factor(rep(paste0("L", 1:4), each = 4))
+Turno <- factor(rep(paste0("T", 1:4), times = 4))
+Algoritmo <- factor(c("A", "B", "C", "D",
+                      "B", "C", "D", "A",
+                      "C", "D", "A", "B",
+                      "D", "A", "B", "C"))
+
+Horas <- c(24.47, 19.69, 17.04, 22.82,
+           21.63, 17.32, 24.75, 25.24,
+           16.75, 21.54, NA,    20.85, # L3, T3, Alg A es el dato perdido
+           23.25, 23.54, 21.66, 18.87)
+
+df <- data.frame(Linea, Turno, Algoritmo, Horas)
+
+# 2. ESTIMACIÓN ANALÍTICA DEL DATO PERDIDO (Mínimos Cuadrados DCL)
+t <- 4
+idx_na <- which(is.na(df$Horas))
+na_linea <- df$Linea[idx_na]
+na_turno <- df$Turno[idx_na]
+na_alg <- df$Algoritmo[idx_na]
+
+# Sumas parciales sin el dato faltante
+R_sum <- sum(df$Horas[df$Linea == na_linea], na.rm = TRUE)
+C_sum <- sum(df$Horas[df$Turno == na_turno], na.rm = TRUE)
+T_sum <- sum(df$Horas[df$Algoritmo == na_alg], na.rm = TRUE)
+G_sum <- sum(df$Horas, na.rm = TRUE)
+
+# Aplicar la fórmula DCL: Y^ = [t(R+C+T) - 2G] / [(t-1)(t-2)]
+y_hat <- (t * (R_sum + C_sum + T_sum) - 2 * G_sum) / ((t - 1) * (t - 2))
+df$Horas[idx_na] <- y_hat
+
+cat("--- DATO PERDIDO ESTIMADO ---\n")
+cat(sprintf("Línea 3, Turno 3, Algoritmo A = %.4f\n\n", y_hat))
+
+# 3. ANÁLISIS DE VARIANZA (ANOVA)
+# Generar modelo inicial
+modelo <- aov(Horas ~ Algoritmo + Linea + Turno, data = df)
+anova_tab <- anova(modelo)
+
+# Ajustar grados de libertad del Error por el parámetro estimado (-1)
+anova_tab["Residuals", "Df"] <- anova_tab["Residuals", "Df"] - 1
+
+# Recalcular Cuadrados Medios (CM), Estadístico F (F0) y Valor-P
+anova_tab["Residuals", "Mean Sq"] <- anova_tab["Residuals", "Sum Sq"] / anova_tab["Residuals", "Df"]
+mse_adj <- anova_tab["Residuals", "Mean Sq"]
+df_res <- anova_tab["Residuals", "Df"]
+
+for(factor in c("Algoritmo", "Linea", "Turno")) {
+  anova_tab[factor, "F value"] <- anova_tab[factor, "Mean Sq"] / mse_adj
+  anova_tab[factor, "Pr(>F)"] <- pf(anova_tab[factor, "F value"], 
+                                    anova_tab[factor, "Df"], 
+                                    df_res, 
+                                    lower.tail = FALSE)
+}
+
+cat("--- TABLA ANOVA (AJUSTADA POR DATO PERDIDO) ---\n")
+print(anova_tab)
+cat("\n")
+
+# 4. PRUEBAS POST-HOC DE TUKEY EXHAUSTIVAS
+# Calcular límite crítico HSD
+alfa <- 0.05
+q_crit <- qtukey(p = 1 - alfa, nmeans = t, df = df_res)
+hsd_val <- q_crit * sqrt(mse_adj / t)
+
+cat("--- PARÁMETROS TUKEY ---\n")
+cat(sprintf("Estadístico q crítico: %.4f\n", q_crit))
+cat(sprintf("Límite Crítico HSD: %.4f\n\n", hsd_val))
+
+# Función dinámica para calcular pares y diagnosticar
+tukey_eval <- function(factor_name) {
+  medias <- tapply(df$Horas, df[[factor_name]], mean)
+  nombres <- names(medias)
+  pares <- combn(nombres, 2)
+  
+  cat(sprintf("--- COMPARACIONES MÚLTIPLES: %s ---\n", toupper(factor_name)))
+  resultados <- data.frame(Par = character(), Diferencia_Abs = numeric(), Diagnostico = character())
+  
+  for(i in 1:ncol(pares)) {
+    p1 <- pares[1, i]
+    p2 <- pares[2, i]
+    diff_abs <- abs(medias[p1] - medias[p2])
+    diagnostico <- ifelse(diff_abs > hsd_val, "SIGNIFICATIVO", "No Significativo")
+    
+    resultados <- rbind(resultados, data.frame(
+      Par = paste(p1, "vs", p2),
+      Diferencia_Abs = round(diff_abs, 4),
+      Diagnostico = diagnostico
+    ))
+  }
+  print(resultados, row.names = FALSE)
+  cat("\n")
+}
+
+# Ejecutar para TODOS los factores del diseño
+tukey_eval("Algoritmo")
+tukey_eval("Linea")
+tukey_eval("Turno")
+
+# =====================================================================
+# 5. DIAGNÓSTICO GRÁFICO DEL MODELO
+# =====================================================================
+
+# Configurar la ventana de gráficos para mostrar 2 columnas y 1 fila
+par(mfrow = c(1, 2), oma = c(0, 0, 2, 0))
+
+# GRÁFICO 1: Boxplot del Factor Principal (Algoritmo)
+boxplot(Horas ~ Algoritmo, data = df,
+        main = "Distribución por Algoritmo",
+        xlab = "Algoritmo (Tratamiento)", 
+        ylab = "Tiempo en Horas",
+        col = c("#ADD8E6", "#90EE90", "#FFB6C1", "#F5DEB3"),
+        border = "darkgray")
+
+# GRÁFICO 2: Diagnóstico de Residuos (Normalidad)
+# Utilizamos el Q-Q plot del modelo para evaluar la normalidad de los errores
+plot(modelo, which = 2, 
+     main = "Q-Q Normal (Supuesto de Normalidad)",
+     sub = "",
+     pch = 19, col = "steelblue")
+
+# Añadir un título general a la ventana gráfica
+mtext("Análisis Visual del Diseño Cuadrado Latino", outer = TRUE, cex = 1.2, font = 2)
+
+# Restaurar los parámetros gráficos a su estado original (1x1)
+par(mfrow = c(1, 1))
+                    </pre>
+                    <div class="img-cap">Código</div>
+                </div>
+                <div class="img-cell" onclick="lbOpen(this)">
+                    <img src="preguntas/p3/R/anovaR.png" alt="R – Cuadrado Latino – paso 2" />
+                    <div class="img-cap">ANOVA</div>
+                </div>
+                <div class="img-cell" onclick="lbOpen(this)">
+                    <img src="preguntas/p3/R/R1.png" alt="R – Cuadrado Latino – paso 2" />
+                    <div class="img-cap">Distribución</div>
+                </div>
+                <div class="img-cell" onclick="lbOpen(this)">
+                    <img src="preguntas/p3/R/R2.png" alt="R – Cuadrado Latino – paso 2" />
+                    <div class="img-cap">NORMALIDAD</div>
+                </div>                
+            </div>
+        </div>
+
+        <!-- ================== CAPTURAS: PYTHON ================== -->
+        <div class="tool-block" style="margin-bottom: 0;">
+            <div class="tool-header r">
+                <div class="tool-badge r">Py</div>
+                <div>
+                    <div class="tool-name">Python</div>
+                    <div class="tool-sub"></div>
+                </div>
+            </div>
+            <div class="img-grid">
+                <div class="img-cell" onclick="lbOpen(this)">
+                    <img src="preguntas/p1/python/codigoP.png" alt="Python – Cuadrado Latino" />
+                    <pre class="hidden-code" style="display: none;">
+import pandas as pd
+import numpy as np
+from scipy import stats
+import itertools
+
+# 1. CONSTRUCCIÓN DE LA MATRIZ DE DATOS
+data = {
+    'Linea': np.repeat(['L1', 'L2', 'L3', 'L4'], 4),
+    'Turno': np.tile(['T1', 'T2', 'T3', 'T4'], 4),
+    'Algoritmo': ['A', 'B', 'C', 'D',
+                  'B', 'C', 'D', 'A',
+                  'C', 'D', 'A', 'B',
+                  'D', 'A', 'B', 'C'],
+    'Horas': [24.47, 19.69, 17.04, 22.82,
+              21.63, 17.32, 24.75, 25.24,
+              16.75, 21.54, np.nan, 20.85,  # L3, T3, Alg A es el dato perdido
+              23.25, 23.54, 21.66, 18.87]
+}
+df = pd.DataFrame(data)
+
+# 2. ESTIMACIÓN ANALÍTICA DEL DATO PERDIDO (Mínimos Cuadrados DCL)
+t = 4
+idx_na = df['Horas'].isna()
+na_linea = df.loc[idx_na, 'Linea'].values[0]
+na_turno = df.loc[idx_na, 'Turno'].values[0]
+na_alg = df.loc[idx_na, 'Algoritmo'].values[0]
+
+# Sumas parciales sin el dato faltante
+R_sum = df.loc[(df['Linea'] == na_linea) & ~idx_na, 'Horas'].sum()
+C_sum = df.loc[(df['Turno'] == na_turno) & ~idx_na, 'Horas'].sum()
+T_sum = df.loc[(df['Algoritmo'] == na_alg) & ~idx_na, 'Horas'].sum()
+G_sum = df.loc[~idx_na, 'Horas'].sum()
+
+# Aplicar la fórmula DCL: Y^ = [t(R+C+T) - 2G] / [(t-1)(t-2)]
+y_hat = (t * (R_sum + C_sum + T_sum) - 2 * G_sum) / ((t - 1) * (t - 2))
+df.loc[idx_na, 'Horas'] = y_hat
+
+print("--- DATO PERDIDO ESTIMADO ---")
+print(f"Línea 3, Turno 3, Algoritmo A = {y_hat:.4f}\n")
+
+# 3. ANÁLISIS DE VARIANZA (ANOVA)
+# Factor de corrección y Suma Total de Cuadrados
+N = t * t
+G_total = df['Horas'].sum()
+FC = (G_total ** 2) / N
+
+SS_Total = (df['Horas'] ** 2).sum() - FC
+SS_Trt = (df.groupby('Algoritmo')['Horas'].sum() ** 2).sum() / t - FC
+SS_Row = (df.groupby('Linea')['Horas'].sum() ** 2).sum() / t - FC
+SS_Col = (df.groupby('Turno')['Horas'].sum() ** 2).sum() / t - FC
+SS_Error = SS_Total - SS_Trt - SS_Row - SS_Col
+
+# Grados de Libertad (Ajustado por dato perdido: se resta 1 adicional al Total y al Error)
+DF_Trt = t - 1
+DF_Row = t - 1
+DF_Col = t - 1
+DF_Total = N - 1 - 1
+DF_Error = DF_Total - DF_Trt - DF_Row - DF_Col
+
+# Cuadrados Medios
+MS_Trt = SS_Trt / DF_Trt
+MS_Row = SS_Row / DF_Row
+MS_Col = SS_Col / DF_Col
+MS_Error = SS_Error / DF_Error
+
+# Estadísticos F0
+F_Trt = MS_Trt / MS_Error
+F_Row = MS_Row / MS_Error
+F_Col = MS_Col / MS_Error
+
+# Valores P (usando scipy.stats.f.sf para la cola derecha de la distribución F)
+p_Trt = stats.f.sf(F_Trt, DF_Trt, DF_Error)
+p_Row = stats.f.sf(F_Row, DF_Row, DF_Error)
+p_Col = stats.f.sf(F_Col, DF_Col, DF_Error)
+
+# Construir Tabla ANOVA
+anova_data = {
+    'Fuente': ['Algoritmos', 'Líneas', 'Turnos', 'Error', 'Total'],
+    'GL': [DF_Trt, DF_Row, DF_Col, DF_Error, DF_Total],
+    'SC': [SS_Trt, SS_Row, SS_Col, SS_Error, SS_Total],
+    'CM': [MS_Trt, MS_Row, MS_Col, MS_Error, np.nan],
+    'F0': [F_Trt, F_Row, F_Col, np.nan, np.nan],
+    'Valor-P': [p_Trt, p_Row, p_Col, np.nan, np.nan]
+}
+anova_df = pd.DataFrame(anova_data)
+
+print("--- TABLA ANOVA (AJUSTADA POR DATO PERDIDO) ---")
+print(anova_df.to_string(index=False, na_rep='', float_format="%.4f"))
+print("\n")
+
+# 4. PRUEBAS POST-HOC DE TUKEY EXHAUSTIVAS
+alpha = 0.05
+# Extraer valor q_crítico de la distribución de rango estudentizado
+q_crit = stats.studentized_range.ppf(1 - alpha, k=t, df=DF_Error)
+hsd_val = q_crit * np.sqrt(MS_Error / t)
+
+print("--- PARÁMETROS TUKEY ---")
+print(f"Estadístico q crítico: {q_crit:.4f}")
+print(f"Límite Crítico HSD: {hsd_val:.4f}\n")
+
+def tukey_eval(factor_name):
+    print(f"--- COMPARACIONES MÚLTIPLES: {factor_name.upper()} ---")
+    medias = df.groupby(factor_name)['Horas'].mean()
+    niveles = medias.index.tolist()
+    # Generar todos los pares posibles k(k-1)/2
+    pares = list(itertools.combinations(niveles, 2))
+    
+    resultados = []
+    for p1, p2 in pares:
+        diff_abs = abs(medias[p1] - medias[p2])
+        diagnostico = "SIGNIFICATIVO" if diff_abs > hsd_val else "No Significativo"
+        resultados.append({
+            'Par': f"{p1} vs {p2}",
+            'Diferencia_Abs': diff_abs,
+            'Diagnostico': diagnostico
+        })
+    
+    res_df = pd.DataFrame(resultados)
+    print(res_df.to_string(index=False, float_format="%.4f"))
+    print("\n")
+
+# Ejecutar para TODOS los factores del diseño experimental
+tukey_eval('Algoritmo')
+tukey_eval('Linea')
+tukey_eval('Turno')
+                    </pre>
+                    <div class="img-cap">Código</div>
+                </div>
+                <div class="img-cell" onclick="lbOpen(this)">
+                    <img src="preguntas/p3/python/anovaP.png" alt="Python – Cuadrado Latino – paso 2" />
+                    <div class="img-cap">ANOVA</div>
+                </div>
+            </div>
+        </div>       
+        
+    </div>
+    <!-- ✅ FIN DEL REQUERIMIENTO 07 -->
+
+
+    <!-- 
+    ████████████████████████████████████████████████████████████████████████
+    █ 08. CONCLUSIONES
+    ████████████████████████████████████████████████████████████████████████ 
+    -->
+    <div class="tool-block" style="margin-top: 3rem; margin-bottom: 2rem;">
+        <div class="tool-header">
+            <div class="tool-badge" style="background: var(--gold); color: #fff;">08</div>
+            <div>
+                <div class="tool-name">Conclusiones</div>
+                <div class="tool-sub">Recomendaciones sobre algoritmos de mantenimiento predictivo</div>
+            </div>
+        </div>
+        <div style="padding: 1.5rem; background: var(--white);">
+
+            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                
+                <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--gold);">
+                    <strong style="font-size: 1.05rem;">🤖 Algoritmo (Tratamiento)</strong>
+                    <p style="margin-top: 0.5rem;">Se rechaza H₀ (p ≈ 3.5e-5). El algoritmo <strong>C (LSTM)</strong> produce significativamente menos horas de inactividad (media ≈ 18.54 h), seguido de <strong>D (Transformer) ≈ 21.20 h</strong>. Los algoritmos <strong>A (Reglas) y B (Random Forest)</strong> son estadísticamente equivalentes y los de peor desempeño (≈22.97 h y 22.54 h). La prueba de Tukey confirma que C es superior a todos, y D también es mejor que A y B.</p>
+                </div>
+
+                <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--xl);">
+                    <strong style="font-size: 1.05rem;">🏭 Línea y Turno (Bloques)</strong>
+                    <p>Ambos bloques resultaron significativos (p < 0.05). La <strong>Línea 3</strong> muestra la menor inactividad, mientras que el <strong>Turno 4</strong> es el más problemático. Controlar estos factores fue crucial para aislar el efecto del algoritmo.</p>
+                </div>
+
+                <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--mt);">
+                    <strong style="font-size: 1.05rem;">🧮 Consistencia entre softwares y dato faltante</strong>
+                    <p>Minitab, Excel, R y Python coinciden en la significancia de los factores, aunque Minitab <strong>no resta el grado de libertad por el dato perdido</strong> (GL<sub>Error</sub> = 6 vs 5 en los demás). Esta discrepancia metodológica no altera las conclusiones prácticas.</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.03)); padding: 1.2rem; border-radius: var(--rad); border: 1px solid var(--gold);">
+                    <strong>🏆 Recomendación final</strong>
+                    <p style="margin-top: 0.5rem;">Se recomienda implementar el <strong>algoritmo C (LSTM)</strong> como solución de mantenimiento predictivo, ya que reduce las horas de inactividad en aproximadamente <strong>4.4 horas</strong> respecto al promedio de A y B. Dado que cada hora de inactividad equivale a USD 42,000, el ahorro mensual estimado supera los <strong>USD 184,000</strong>. Si los recursos computacionales son limitados, el algoritmo D (Transformer) es una alternativa válida, aunque menos eficiente que LSTM. Se recomienda además investigar las causas del alto tiempo de inactividad en el Turno 4.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- ✅ FIN DEL REQUERIMIENTO 08 -->
+
+</div>

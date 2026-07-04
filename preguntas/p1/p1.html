@@ -12,17 +12,15 @@
     <!-- ✅ FIN DE LA CABECERA -->
 
 
-    <!-- 
-    ████████████████████████████████████████████████████████████████████████
-    █ 01. CONTEXTO Y DATOS
-    ████████████████████████████████████████████████████████████████████████ 
-    -->
+    <!-- ================================================================ -->
+    <!-- 01. DESCRIPCIÓN DEL PROBLEMA                                     -->
+    <!-- ================================================================ -->
     <div class="tool-block" style="margin-bottom: 2rem;">
         <div class="tool-header">
             <div class="tool-badge" style="background: var(--gold); color: #fff;">01</div>
             <div>
-                <div class="tool-name">Contexto del proceso</div>
-                <div class="tool-sub">Muestreo de longitudes de remaches (n = 4)</div>
+                <div class="tool-name">Descripción del problema</div>
+                <div class="tool-sub">Contexto y datos del proceso</div>
             </div>
         </div>
         <div style="padding: 1.5rem; background: var(--white);">
@@ -78,24 +76,57 @@
             </ul>
         </div>
     </div>
-    <!-- ✅ FIN DEL REQUERIMIENTO 01 -->
+    <!-- ✅ FIN DE LA DESCRIPCIÓN -->
 
 
-    <!-- 
-    ████████████████████████████████████████████████████████████████████████
-    █ 02. ESTADÍSTICOS MUESTRALES (MEDIAS Y RANGOS)
-    ████████████████████████████████████████████████████████████████████████ 
-    -->
+    <!-- ================================================================ -->
+    <!-- 02. IDENTIFICACIÓN DE LA CARTA                                   -->
+    <!-- ================================================================ -->
     <div class="tool-block" style="margin-bottom: 2rem;">
         <div class="tool-header">
             <div class="tool-badge" style="background: var(--gold); color: #fff;">02</div>
             <div>
-                <div class="tool-name">Estadísticos muestrales</div>
-                <div class="tool-sub">Medias y rangos por muestra</div>
+                <div class="tool-name">Identificación de la carta</div>
+                <div class="tool-sub">Tipo de gráfica y factores</div>
+            </div>
+        </div>
+        <div style="padding: 1.5rem; background: var(--white);">
+            <p style="margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.6;">
+                Se utiliza una <strong>carta de control X‑barra y R</strong> para variables continuas, apropiada para monitorear la media y la variabilidad de un proceso cuando se dispone de subgrupos de tamaño fijo (n = 4). Los límites de control se calculan a partir del rango promedio (R̄) y los factores constantes para n = 4:
+            </p>
+            <ul style="margin-bottom: 1rem; padding-left: 1.8rem; font-size:0.95rem;">
+                <li><strong>A₂ = 0.729</strong> (para límites de X‑barra)</li>
+                <li><strong>D₃ = 0</strong> (límite inferior para R)</li>
+                <li><strong>D₄ = 2.282</strong> (límite superior para R)</li>
+            </ul>
+            <!-- Cuadro adicional con fondo oscuro -->
+            <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; border-left: 4px solid #f1c40f; color: #ecf0f1;">
+                <strong>📌 Fórmulas empleadas:</strong>
+                <ul style="margin:0.5rem 0 0 1.5rem; color: #ecf0f1;">
+                    <li><strong>X̄‑barra:</strong> LCS = X̄̄ + A₂·R̄ &nbsp;|&nbsp; LCI = X̄̄ − A₂·R̄ &nbsp;|&nbsp; Central = X̄̄</li>
+                    <li><strong>R:</strong> LCS = D₄·R̄ &nbsp;|&nbsp; LCI = D₃·R̄ &nbsp;|&nbsp; Central = R̄</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- ✅ FIN DE IDENTIFICACIÓN -->
+
+
+    <!-- ================================================================ -->
+    <!-- 03. DESARROLLO EN EXCEL                                          -->
+    <!-- ================================================================ -->
+    <div class="tool-block" style="margin-bottom: 2rem;">
+        <div class="tool-header xl">
+            <div class="tool-badge" style="background: #2ecc71; color: #fff;">03</div>
+            <div>
+                <div class="tool-name">Desarrollo en Excel</div>
+                <div class="tool-sub">Cálculo de estadísticos, límites y gráfica</div>
             </div>
         </div>
         <div style="padding: 1.5rem; background: var(--white);">
 
+            <!-- Tabla de estadísticos -->
+            <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin-bottom:0.8rem;">📊 Estadísticos muestrales</h4>
             <div style="overflow-x: auto; margin-bottom: 1.5rem;">
                 <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem; text-align: center;">
                     <thead>
@@ -133,220 +164,211 @@
                 </table>
             </div>
 
-            <!-- NOTA ADICIONAL CON FONDO OSCURO -->
-            <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; border-left: 4px solid #f1c40f; color: #ecf0f1;">
-                <strong>📌 Nota:</strong> Los promedios se calcularon con todos los decimales; los valores mostrados están redondeados a 4 cifras.
+            <!-- Límites de control -->
+            <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin-bottom:0.8rem;">📐 Límites de control</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); border-left: 4px solid var(--py);">
+                    <h5 style="margin: 0 0 0.5rem 0; font-family: var(--font-d);">X‑barra</h5>
+                    <ul style="margin: 0; padding-left: 1.2rem; font-size:0.9rem;">
+                        <li>LCS = 1.3983 + 0.729×0.0223 = <strong>1.4145</strong></li>
+                        <li>LCI = 1.3983 − 0.729×0.0223 = <strong>1.3820</strong></li>
+                        <li>Central = <strong>1.3983</strong></li>
+                    </ul>
+                </div>
+                <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); border-left: 4px solid var(--xl);">
+                    <h5 style="margin: 0 0 0.5rem 0; font-family: var(--font-d);">R</h5>
+                    <ul style="margin: 0; padding-left: 1.2rem; font-size:0.9rem;">
+                        <li>LCS = 2.282×0.0223 = <strong>0.0509</strong></li>
+                        <li>LCI = 0×0.0223 = <strong>0</strong></li>
+                        <li>Central = <strong>0.0223</strong></li>
+                    </ul>
+                </div>
             </div>
 
+            <!-- Gráfica Excel (grande) -->
+            <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin-bottom:0.8rem;">📈 Gráficas generadas en Excel</h4>
+            <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
+                <img src="preguntas/p1/excel/E1.png" alt="Gráfica X-barra de Excel" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
+                <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica X‑barra (Excel)</p>
+            </div>
+            <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; text-align: center;">
+                <img src="preguntas/p1/excel/E2.png" alt="Gráfica R de Excel" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
+                <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica R (Excel)</p>
+            </div>
+
+
+
+            <!-- Cuadro adicional oscuro -->
+            <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f;">
+                <strong>📌 Verificación Excel:</strong> Todos los puntos caen dentro de los límites. El proceso se encuentra en control estadístico.
+            </div>
         </div>
     </div>
-    <!-- ✅ FIN DEL REQUERIMIENTO 02 -->
+    <!-- ✅ FIN DESARROLLO EXCEL -->
 
 
-    <!-- 
-    ████████████████████████████████████████████████████████████████████████
-    █ 03. LÍMITES DE CONTROL (X‑barra y R)
-    ████████████████████████████████████████████████████████████████████████ 
-    -->
+    <!-- ================================================================ -->
+    <!-- 04. DESARROLLO EN MINITAB                                        -->
+    <!-- ================================================================ -->
     <div class="tool-block" style="margin-bottom: 2rem;">
-        <div class="tool-header">
-            <div class="tool-badge" style="background: var(--gold); color: #fff;">03</div>
+        <div class="tool-header mt">
+            <div class="tool-badge" style="background: #6c8ebf; color: #fff;">04</div>
             <div>
-                <div class="tool-name">Límites de control</div>
-                <div class="tool-sub">Cálculo con factores para n = 4 (A₂ = 0.729, D₃ = 0, D₄ = 2.282)</div>
+                <div class="tool-name">Desarrollo en Minitab</div>
+                <div class="tool-sub">Gráficas de control X‑barra y R</div>
             </div>
         </div>
         <div style="padding: 1.5rem; background: var(--white);">
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); border-left: 4px solid var(--py);">
-                    <h5 style="margin: 0 0 0.5rem 0; font-family: var(--font-d);">📈 Gráfica X‑barra</h5>
-                    <ul style="margin: 0; padding-left: 1.2rem; font-size:0.95rem;">
-                        <li>LCS = X̄̄ + A₂·R̄ = 1.3983 + 0.729×0.0223 = <strong>1.4145</strong></li>
-                        <li>LCI = X̄̄ − A₂·R̄ = 1.3983 − 0.729×0.0223 = <strong>1.3820</strong></li>
-                        <li>Línea central = X̄̄ = <strong>1.3983</strong></li>
-                    </ul>
-                </div>
-                <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); border-left: 4px solid var(--xl);">
-                    <h5 style="margin: 0 0 0.5rem 0; font-family: var(--font-d);">📊 Gráfica R</h5>
-                    <ul style="margin: 0; padding-left: 1.2rem; font-size:0.95rem;">
-                        <li>LCS = D₄·R̄ = 2.282×0.0223 = <strong>0.0509</strong></li>
-                        <li>LCI = D₃·R̄ = 0×0.0223 = <strong>0</strong></li>
-                        <li>Línea central = R̄ = <strong>0.0223</strong></li>
-                    </ul>
-                </div>
+            <p style="margin-bottom: 1.2rem; font-size:0.95rem; line-height:1.6;">
+                En Minitab se utilizó la opción <strong>Stat → Control Charts → Variables charts for subgroups → Xbar‑R</strong>. Se introdujeron los datos de las 20 muestras (cada una con 4 observaciones) y se obtuvieron las siguientes gráficas:
+            </p>
+
+            <!-- Gráfica Minitab (grande) -->
+            <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
+                <img src="preguntas/p1/minitab/M1.png" alt="Gráfica X-barra y R de Minitab" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
+                <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica X‑barra y R (Minitab)</p>
             </div>
 
-            <!-- VERIFICACIÓN INICIAL CON FONDO OSCURO -->
+            <!-- Cuadro adicional oscuro -->
             <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f;">
-                <strong>⚠️ Verificación inicial:</strong> Todos los valores de X̄ (mínimo 1.390, máximo 1.4068) caen dentro de [1.3820, 1.4145]. Todos los rangos (mínimo 0.004, máximo 0.042) caen dentro de [0, 0.0509]. No hay señales de fuera de control.
+                <strong>📌 Verificación Minitab:</strong> Los límites coinciden con los calculados manualmente (LCS X̄=1.4145, LCI X̄=1.3820; LCS R=0.0509). No hay puntos fuera de control ni patrones especiales.
             </div>
 
+            <!-- Capturas adicionales (opcional) -->
+
         </div>
     </div>
-    <!-- ✅ FIN DEL REQUERIMIENTO 03 -->
-
-<!-- 
-    ████████████████████████████████████████████████████████████████████████
-    █ 04. GRÁFICAS DE CONTROL (IMÁGENES DESDE MINITAB Y EXCEL)
-    ████████████████████████████████████████████████████████████████████████ 
-    -->
-<div class="tool-block" style="margin-bottom: 2rem;">
-    <div class="tool-header">
-        <div class="tool-badge" style="background: var(--gold); color: #fff;">04</div>
-        <div>
-            <div class="tool-name">Gráficas de control</div>
-            <div class="tool-sub">Visualización de X‑barra y R con límites</div>
-        </div>
-    </div>
-    <div style="padding: 1.5rem; background: var(--white);">
-
-        <!-- ================== MINITAB ================== -->
-        <h4 style="font-family: var(--font-d); font-size: 1.1rem; color: var(--ink); margin: 0 0 1rem 0; border-left: 4px solid #6c8ebf; padding-left: 12px;">📈 Minitab</h4>
-
-        <!-- Gráfica XR-barra (Minitab) -->
-        <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
-            <img src="preguntas/p1/minitab/M1.png" alt="Gráfica X-barra de Minitab" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
-            <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica X‑barra (Minitab)</p>
-        </div>
+    <!-- ✅ FIN DESARROLLO MINITAB -->
 
 
-        <!-- ================== EXCEL ================== -->
-        <h4 style="font-family: var(--font-d); font-size: 1.1rem; color: var(--ink); margin: 2rem 0 1rem 0; border-left: 4px solid #2ecc71; padding-left: 12px;">📊 Excel</h4>
-
-        <!-- Gráfica X-barra (Excel) -->
-        <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
-            <img src="preguntas/p1/excel/E1.png" alt="Gráfica X-barra de Excel" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
-            <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica X‑barra (Excel)</p>
-        </div>
-
-        <!-- Gráfica R (Excel) -->
-        <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; text-align: center;">
-            <img src="preguntas/p1/excel/E2.png" alt="Gráfica R de Excel" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
-            <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica R (Excel)</p>
-        </div>
-
-        <!-- INTERPRETACIÓN VISUAL CON FONDO OSCURO -->
-        <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f; margin-top: 1.5rem;">
-            <strong>📌 Interpretación visual:</strong> Ambas gráficas (Minitab y Excel) muestran que todos los puntos se encuentran dentro de los límites de control, sin patrones sistemáticos. El proceso es estable.
-        </div>
-
-    </div>
-</div>
-<!-- ✅ FIN DEL REQUERIMIENTO 04 -->
-
-
-    <!-- 
-    ████████████████████████████████████████████████████████████████████████
-    █ 05. INTERPRETACIÓN Y CONCLUSIONES
-    ████████████████████████████████████████████████████████████████████████ 
-    -->
-    <div class="tool-block" style="margin-top: 2rem; margin-bottom: 2rem;">
+    <!-- ================================================================ -->
+    <!-- 05. INTERPRETACIÓN                                               -->
+    <!-- ================================================================ -->
+    <div class="tool-block" style="margin-bottom: 2rem;">
         <div class="tool-header">
             <div class="tool-badge" style="background: var(--gold); color: #fff;">05</div>
             <div>
-                <div class="tool-name">Interpretación y conclusiones</div>
-                <div class="tool-sub">Estabilidad del proceso y recomendaciones</div>
+                <div class="tool-name">Interpretación</div>
+                <div class="tool-sub">Análisis de la estabilidad del proceso</div>
+            </div>
+        </div>
+        <div style="padding: 1.5rem; background: var(--white);">
+            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--py);">
+                    <strong style="font-size: 1.05rem;">📊 Gráfica X‑barra</strong>
+                    <p style="margin-top: 0.5rem;">La media de cada subgrupo oscila entre 1.390 y 1.4068, valores que se mantienen dentro de los límites de control [1.3820, 1.4145]. No se observan tendencias, ciclos ni puntos fuera de los límites. Esto indica que la media del proceso es estable y no ha sufrido desplazamientos significativos durante el periodo de muestreo.</p>
+                </div>
+                <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--xl);">
+                    <strong style="font-size: 1.05rem;">📉 Gráfica R</strong>
+                    <p style="margin-top: 0.5rem;">Los rangos varían entre 0.004 y 0.042, todos por debajo del límite superior (0.0509) y por encima del límite inferior (0). No hay señales de aumento en la variabilidad, lo que sugiere que la dispersión del proceso es consistente y controlada.</p>
+                </div>
+                <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--mt);">
+                    <strong style="font-size: 1.05rem;">✅ Cumplimiento de reglas</strong>
+                    <p style="margin-top: 0.5rem;">No se detectan violaciones de las reglas de Western Electric (puntos fuera de los límites, rachas de 7 puntos consecutivos por encima o debajo de la central, etc.). El proceso opera bajo causas comunes de variación.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ✅ FIN INTERPRETACIÓN -->
+
+
+    <!-- ================================================================ -->
+    <!-- 06. CONCLUSIONES                                                 -->
+    <!-- ================================================================ -->
+    <div class="tool-block" style="margin-bottom: 2rem;">
+        <div class="tool-header">
+            <div class="tool-badge" style="background: var(--gold); color: #fff;">06</div>
+            <div>
+                <div class="tool-name">Conclusiones</div>
+                <div class="tool-sub">Recomendaciones finales</div>
             </div>
         </div>
         <div style="padding: 1.5rem; background: var(--white);">
 
             <div style="display: flex; flex-direction: column; gap: 1.2rem;">
-                
                 <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--gold);">
-                    <strong style="font-size: 1.05rem;">✅ Proceso en control estadístico</strong>
-                    <p style="margin-top: 0.5rem;">Las gráficas X‑barra y R no muestran puntos fuera de los límites de control (LCS/LCI) ni patrones no aleatorios (rachas, tendencias, etc.). Por lo tanto, el proceso de producción de remaches se considera <strong>estable</strong> y la variabilidad observada es debida a causas comunes.</p>
+                    <strong style="font-size: 1.05rem;">🔍 Estabilidad confirmada</strong>
+                    <p style="margin-top: 0.5rem;">Ambas cartas de control (X‑barra y R) indican que el proceso de producción de remaches se encuentra <strong>en control estadístico</strong>. No se requiere ninguna acción correctiva inmediata.</p>
                 </div>
-
                 <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--xl);">
-                    <strong style="font-size: 1.05rem;">📉 Comportamiento de la media</strong>
-                    <p>La media general (X̄̄ = 1.3983 mm) y la amplitud de los límites (±0.0163 mm) indican que el proceso está centrado. No hay señales de desplazamiento en la media a lo largo de las 20 muestras.</p>
+                    <strong style="font-size: 1.05rem;">📏 Capacidad del proceso</strong>
+                    <p>La media general (1.3983 mm) y la variabilidad (R̄ = 0.0223) son consistentes. Se recomienda calcular los índices de capacidad (Cp, Cpk) para evaluar si el proceso cumple con las especificaciones técnicas.</p>
                 </div>
-
                 <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--mt);">
-                    <strong style="font-size: 1.05rem;">📊 Variabilidad del proceso</strong>
-                    <p>El rango promedio (R̄ = 0.0223 mm) y el límite superior (0.0509 mm) muestran que la dispersión dentro de cada muestra es pequeña y consistente. No hay indicios de aumento en la variabilidad.</p>
+                    <strong style="font-size: 1.05rem;">🔄 Plan de acción</strong>
+                    <p>Mantener el esquema de muestreo actual (cada 10 minutos, n=4). Actualizar los límites de control periódicamente (cada 25-30 muestras) para reflejar posibles mejoras o cambios en el proceso.</p>
                 </div>
-
                 <div style="background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.03)); padding: 1.2rem; border-radius: var(--rad); border: 1px solid var(--gold);">
                     <strong>🏭 Recomendación operativa</strong>
                     <p style="margin-top: 0.5rem;">El proceso está bajo control y puede continuar su operación normal. Se sugiere mantener el plan de muestreo (cada 10 minutos) y actualizar periódicamente los límites de control a medida que se obtengan más datos. Si se desea mejorar la capacidad, se podría analizar la variabilidad entre máquinas o turnos.</p>
                 </div>
-
-                <!-- NOTA FINAL CON FONDO OSCURO -->
+                <!-- Cuadro adicional oscuro -->
                 <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f; margin-top: 0.5rem;">
                     <strong>📌 Nota:</strong> Este análisis asume que los datos son independientes y la distribución es aproximadamente normal. La gráfica R es adecuada para n = 4.
                 </div>
-
             </div>
 
         </div>
     </div>
-    <!-- ✅ FIN DEL REQUERIMIENTO 05 -->
+    <!-- ✅ FIN CONCLUSIONES -->
 
 
-    <!-- 
-    ████████████████████████████████████████████████████████████████████████
-    █ 06. COMPROBACIÓN DE RESULTADOS (CAPTURAS DE MINITAB Y EXCEL)
-    ████████████████████████████████████████████████████████████████████████ 
-    -->
+    <!-- ================================================================ -->
+    <!-- 07. COMPROBACIÓN DE RESULTADOS (ARCHIVOS DESCARGABLES)           -->
+    <!-- ================================================================ -->
     <div style="margin-bottom: 2rem; margin-top: 3rem;">
-        
-        <h3 style="font-family: var(--font-d); font-weight: 800; font-size: 1.5rem; color: var(--ink); border-left: 6px solid var(--gold); padding-left: 14px; margin-bottom: 1.5rem; text-transform: uppercase;">
-            06. Comprobación de Resultados (Capturas)
-        </h3>
 
-        <!-- ================== CAPTURAS: MINITAB ================== -->
-        <div class="tool-block">
-            <div class="tool-header mt">
-                <div class="tool-badge mt">MT</div>
+
+        <div class="tool-block" style="margin-bottom: 0;">
+            <div class="tool-header" style="background: transparent; border-bottom: none;">
+                <div class="tool-badge" style="background: var(--gold); color: #fff;">07</div>
                 <div>
-                    <div class="tool-name">Minitab</div>
-                    <div class="tool-sub">Gráficas de control X‑barra y R</div>
+                    <div class="tool-name">Comprobación de Resultados</div>
+                    <div class="tool-sub">Archivos de desarrollo completos en Excel y Minitab</div>
                 </div>
             </div>
-            <div class="img-grid">
-                <div class="img-cell" onclick="lbOpen(this)">
-                    <img src="preguntas/p5/minitab/xbarra.png" alt="Gráfica X-barra de Minitab" />
-                    <div class="img-cap">Gráfica X‑barra</div>
+            <div style="padding: 1.5rem; background: var(--white);">
+
+                <p style="margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.5;">
+                    A continuación, puedes descargar los archivos con la solución completa del problema, incluyendo los datos, los cálculos de estadísticos, límites de control y las gráficas X‑barra y R generadas en cada software.
+                </p>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin: 1.5rem 0;">
+
+                    <!-- Botón descarga Excel -->
+                    <a href="preguntas/p1/excel/Libro2.xlsx" download="Solucion_Control_Remaches_Excel.xlsx" 
+                       style="background: #1e3a2f; color: #ecf0f1; padding: 1rem 2.5rem; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 0.8rem; border-left: 5px solid #2ecc71; transition: 0.2s; box-shadow: 0 4px 8px rgba(0,0,0,0.2); flex: 0 1 auto; min-width: 220px; justify-content: center;">
+                        <span style="font-size: 1.8rem;">📊</span>
+                        <span>Descargar solución en Excel<br><small style="font-weight: normal; opacity: 0.8;">(.xlsx)</small></span>
+                    </a>
+
+                    <!-- Botón descarga Minitab (puede ser .MPJ, .MTW o .PDF) -->
+                    <a href="preguntas/p1/minitab/Minitab.mpj" download="Solucion_Control_Remaches_Minitab.mpj" 
+                       style="background: #2c3e50; color: #ecf0f1; padding: 1rem 2.5rem; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 0.8rem; border-left: 5px solid #6c8ebf; transition: 0.2s; box-shadow: 0 4px 8px rgba(0,0,0,0.2); flex: 0 1 auto; min-width: 220px; justify-content: center;">
+                        <span style="font-size: 1.8rem;">📈</span>
+                        <span>Descargar solución en Minitab<br><small style="font-weight: normal; opacity: 0.8;">(.mpj)</small></span>
+                    </a>
+
                 </div>
-                <div class="img-cell" onclick="lbOpen(this)">
-                    <img src="preguntas/p5/minitab/r.png" alt="Gráfica R de Minitab" />
-                    <div class="img-cap">Gráfica R</div>
+
+                <!-- Cuadro informativo con fondo oscuro y borde lateral -->
+                <div style="background: #1e2a36; padding: 1rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f; margin-top: 1rem;">
+                    <strong>📌 Contenido de los archivos:</strong>
+                    <ul style="margin: 0.5rem 0 0 1.5rem; color: #ecf0f1;">
+                        <li><strong>Excel:</strong> Datos originales, tabla de medias y rangos, límites de control calculados, gráficas X‑barra y R con todos los formatos.</li>
+                        <li><strong>Minitab:</strong> Proyecto con los datos ingresados, las gráficas de control (X‑barra y R) y los resultados estadísticos.</li>
+                    </ul>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">
+                        Ambos archivos contienen la solución completa y verificada del problema.
+                    </p>
                 </div>
-                <div class="img-cell" onclick="lbOpen(this)">
-                    <img src="preguntas/p5/minitab/datos.png" alt="Datos en Minitab" />
-                    <div class="img-cap">Datos</div>
-                </div>
+
+
+
             </div>
         </div>
-
-        <!-- ================== CAPTURAS: EXCEL ================== -->
-        <div class="tool-block" style="margin-top: 1.5rem;">
-            <div class="tool-header xl">
-                <div class="tool-badge xl">XL</div>
-                <div>
-                    <div class="tool-name">Excel</div>
-                    <div class="tool-sub">Gráficas de control X‑barra y R</div>
-                </div>
-            </div>
-            <div class="img-grid">
-                <div class="img-cell" onclick="lbOpen(this)">
-                    <img src="preguntas/p5/excel/xbarra.png" alt="Gráfica X-barra de Excel" />
-                    <div class="img-cap">Gráfica X‑barra</div>
-                </div>
-                <div class="img-cell" onclick="lbOpen(this)">
-                    <img src="preguntas/p5/excel/r.png" alt="Gráfica R de Excel" />
-                    <div class="img-cap">Gráfica R</div>
-                </div>
-                <div class="img-cell" onclick="lbOpen(this)">
-                    <img src="preguntas/p5/excel/datos.png" alt="Datos en Excel" />
-                    <div class="img-cap">Datos</div>
-                </div>
-            </div>
-        </div>
-
     </div>
-    <!-- ✅ FIN DEL REQUERIMIENTO 06 -->
+    <!-- ✅ FIN DE COMPROBACIÓN DE RESULTADOS -->
 
 </div>
