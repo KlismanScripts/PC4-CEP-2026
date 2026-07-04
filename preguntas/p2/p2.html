@@ -1,357 +1,384 @@
-<div class="prob-panel active" id="p5">
+<div class="prob-panel active" id="p2">
 
     <!-- 
     ========================================================================
-    PROBLEMA 5: GRÁFICAS DE CONTROL PARA LONGITUD DE REMACHES
+    PROBLEMA 2: ERRORES DE PICKING EN AUDITORÍA DE PEDIDOS (AMAZON)
     ======================================================================== 
     -->
     <div class="prob-head">
-        <div class="prob-tag">Problema 05</div>
-        <h2 class="prob-title">Gráficas de Control X‑barra y R – Remaches de acero</h2>
+        <div class="prob-tag">Problema 02</div>
+        <h2 class="prob-title">Carta u – Errores de picking (tamaño de muestra variable, límites variables)</h2>
     </div>
     <!-- ✅ FIN DE LA CABECERA -->
 
 
-    <!-- 
-    ████████████████████████████████████████████████████████████████████████
-    █ 01. CONTEXTO Y DATOS
-    ████████████████████████████████████████████████████████████████████████ 
-    -->
+    <!-- ================================================================ -->
+    <!-- 01. DESCRIPCIÓN DEL PROBLEMA                                     -->
+    <!-- ================================================================ -->
     <div class="tool-block" style="margin-bottom: 2rem;">
         <div class="tool-header">
             <div class="tool-badge" style="background: var(--gold); color: #fff;">01</div>
             <div>
-                <div class="tool-name">Contexto del proceso</div>
-                <div class="tool-sub">Muestreo de longitudes de remaches (n = 4)</div>
+                <div class="tool-name">Descripción del problema</div>
+                <div class="tool-sub">Contexto y datos del proceso</div>
             </div>
         </div>
         <div style="padding: 1.5rem; background: var(--white);">
             <p style="margin-bottom: 1.2rem; font-size: 0.95rem; line-height: 1.5;">
-                <strong>📌 Enunciado:</strong> En una corrida de producción se extrajeron 20 muestras de los resultados de una máquina que produce remaches de acero para la construcción industrial. Las muestras se tomaron a intervalos de 10 minutos, y cada una consistía en n = 4 remaches, cuyas longitudes (en mm) fueron medidas. El objetivo es verificar si el proceso se encuentra en control estadístico mediante gráficas de control X‑barra y R.
+                <strong>📌 Enunciado:</strong> El equipo de calidad de Amazon audita diariamente una muestra de pedidos ya empacados para contar cuántos artículos fueron seleccionados incorrectamente (errores de picking). El número de pedidos auditados varía cada día según la disponibilidad del equipo auditor.
             </p>
             
             <div style="overflow-x: auto; margin-bottom: 1.8rem;">
                 <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem;">
                     <thead>
                         <tr style="border-bottom: 1px solid var(--rule); background: rgba(0,0,0,0.2);">
-                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Muestra</th>
-                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Item 1</th>
-                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Item 2</th>
-                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Item 3</th>
-                            <th style="padding: 10px; text-align: center; color: var(--ink);">Item 4</th>
+                            <th style="padding: 8px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Día</th>
+                            <th style="padding: 8px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">n (auditados)</th>
+                            <th style="padding: 8px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Errores</th>
+                            <th style="padding: 8px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Día</th>
+                            <th style="padding: 8px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">n (auditados)</th>
+                            <th style="padding: 8px; text-align: center; color: var(--ink);">Errores</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">1</td><td>1.405</td><td>1.419</td><td>1.377</td><td>1.400</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">2</td><td>1.407</td><td>1.397</td><td>1.377</td><td>1.393</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">3</td><td>1.385</td><td>1.392</td><td>1.399</td><td>1.392</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">4</td><td>1.386</td><td>1.419</td><td>1.387</td><td>1.417</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">5</td><td>1.382</td><td>1.391</td><td>1.390</td><td>1.397</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">6</td><td>1.404</td><td>1.406</td><td>1.404</td><td>1.402</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">7</td><td>1.409</td><td>1.386</td><td>1.399</td><td>1.403</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">8</td><td>1.399</td><td>1.382</td><td>1.389</td><td>1.410</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">9</td><td>1.408</td><td>1.411</td><td>1.394</td><td>1.388</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">10</td><td>1.399</td><td>1.421</td><td>1.400</td><td>1.407</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">11</td><td>1.394</td><td>1.397</td><td>1.396</td><td>1.409</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">12</td><td>1.409</td><td>1.389</td><td>1.398</td><td>1.399</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">13</td><td>1.405</td><td>1.387</td><td>1.399</td><td>1.393</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">14</td><td>1.390</td><td>1.410</td><td>1.388</td><td>1.384</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">15</td><td>1.393</td><td>1.403</td><td>1.387</td><td>1.415</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">16</td><td>1.413</td><td>1.390</td><td>1.395</td><td>1.411</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">17</td><td>1.410</td><td>1.415</td><td>1.392</td><td>1.397</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">18</td><td>1.407</td><td>1.386</td><td>1.396</td><td>1.393</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">19</td><td>1.411</td><td>1.406</td><td>1.392</td><td>1.387</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">20</td><td>1.404</td><td>1.396</td><td>1.391</td><td>1.390</td></tr>
+                        <tr><td>1</td><td>50</td><td>3</td><td>10</td><td>58</td><td>5</td></tr>
+                        <tr><td>2</td><td>45</td><td>2</td><td>11</td><td>53</td><td>3</td></tr>
+                        <tr><td>3</td><td>55</td><td>4</td><td>12</td><td>49</td><td>2</td></tr>
+                        <tr><td>4</td><td>48</td><td>3</td><td>13</td><td>56</td><td>4</td></tr>
+                        <tr><td>5</td><td>52</td><td>2</td><td>14</td><td>51</td><td>3</td></tr>
+                        <tr><td>6</td><td>60</td><td>5</td><td>15</td><td>46</td><td>2</td></tr>
+                        <tr><td>7</td><td>47</td><td>3</td><td>16</td><td>59</td><td>6</td></tr>
+                        <tr><td>8</td><td>50</td><td>4</td><td>17</td><td>54</td><td>3</td></tr>
+                        <tr><td>9</td><td>44</td><td>2</td><td>18</td><td>50</td><td>3</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <h3 style="font-family: var(--font-d); font-weight: 700; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; border-left: 4px solid var(--gold); padding-left: 12px;">🎯 Objetivo del análisis</h3>
-            <p style="margin-bottom: 1.2rem;">Evaluar la estabilidad del proceso de producción de remaches mediante gráficas de control <strong>X‑barra</strong> (media) y <strong>R</strong> (rango). Se determinará si el proceso está en control estadístico y si la variabilidad es aceptable.</p>
+            <p style="margin-bottom: 1.2rem;">Monitorear la tasa de errores de picking (defectos por pedido) utilizando una carta de atributos tipo <strong>u</strong> con límites de control variables (por día), dado que el tamaño de muestra varía día a día.</p>
 
-            <h3 style="font-family: var(--font-d); font-weight: 700; font-size: 1.2rem; margin: 1.2rem 0 0.5rem 0; border-left: 4px solid var(--gold); padding-left: 12px;">📐 Parámetros del diseño</h3>
+            <h3 style="font-family: var(--font-d); font-weight: 700; font-size: 1.2rem; margin: 1.2rem 0 0.5rem 0; border-left: 4px solid var(--gold); padding-left: 12px;">📐 Parámetros del análisis</h3>
             <ul style="margin-bottom: 0; padding-left: 1.8rem;">
-                <li><strong>Tamaño de muestra:</strong> n = 4 remaches por muestra.</li>
-                <li><strong>Número de muestras:</strong> k = 20.</li>
-                <li><strong>Variable de interés:</strong> Longitud del remache (mm).</li>
-                <li><strong>Límites de control:</strong> Basados en el rango promedio (R̄).</li>
+                <li><strong>Tipo de carta:</strong> u (defectos por unidad).</li>
+                <li><strong>Tamaño de muestra:</strong> Variable (n<sub>i</sub>).</li>
+                <li><strong>Variable de interés:</strong> Número de errores de picking (defectos).</li>
+                <li><strong>Límites de control:</strong> Variables, calculados para cada día usando su propio n<sub>i</sub>.</li>
             </ul>
         </div>
     </div>
-    <!-- ✅ FIN DEL REQUERIMIENTO 01 -->
+    <!-- ✅ FIN DE LA DESCRIPCIÓN -->
 
 
-    <!-- 
-    ████████████████████████████████████████████████████████████████████████
-    █ 02. ESTADÍSTICOS MUESTRALES (MEDIAS Y RANGOS)
-    ████████████████████████████████████████████████████████████████████████ 
-    -->
+    <!-- ================================================================ -->
+    <!-- 02. IDENTIFICACIÓN DE LA CARTA                                   -->
+    <!-- ================================================================ -->
     <div class="tool-block" style="margin-bottom: 2rem;">
         <div class="tool-header">
             <div class="tool-badge" style="background: var(--gold); color: #fff;">02</div>
             <div>
-                <div class="tool-name">Estadísticos muestrales</div>
-                <div class="tool-sub">Medias y rangos por muestra</div>
+                <div class="tool-name">Identificación de la carta</div>
+                <div class="tool-sub">Justificación de la elección (u vs p, np, c)</div>
+            </div>
+        </div>
+        <div style="padding: 1.5rem; background: var(--white);">
+            <p style="margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.6;">
+                Dado que el tamaño de muestra varía día a día (<em>n<sub>i</sub></em> no es constante) y el equipo audita un número variable de pedidos, se utiliza la <strong>carta u</strong> (defectos por unidad). La justificación es:
+            </p>
+            <ul style="margin-bottom: 1rem; padding-left: 1.8rem; font-size:0.95rem;">
+                <li><strong>np</strong> requiere tamaño de muestra constante y cuenta unidades defectuosas (no defectos).</li>
+                <li><strong>p</strong> se usa para proporción de unidades defectuosas, no para conteo de defectos múltiples.</li>
+                <li><strong>c</strong> requiere área de oportunidad constante (mismo número de unidades inspeccionadas).</li>
+                <li><strong>u</strong> es la carta apropiada para conteo de defectos por unidad cuando el área de oportunidad (en este caso, el número de pedidos auditados) varía. Los límites se calculan de forma variable para cada día, usando la fórmula con n<sub>i</sub>.</li>
+            </ul>
+            <!-- Cuadro adicional con fondo oscuro -->
+            <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; border-left: 4px solid #f1c40f; color: #ecf0f1;">
+                <strong>📌 Fórmulas para la carta u con límites variables:</strong>
+                <ul style="margin:0.5rem 0 0 1.5rem; color: #ecf0f1;">
+                    <li><strong>Línea central:</strong> ū = (Σ errores) / (Σ n<sub>i</sub>)</li>
+                    <li><strong>LCS<sub>i</sub>:</strong> ū + 3 · √(ū / n<sub>i</sub>)</li>
+                    <li><strong>LCI<sub>i</sub>:</strong> max(0, ū − 3 · √(ū / n<sub>i</sub>))</li>
+                    <li><strong>u<sub>i</sub>:</strong> errores<sub>i</sub> / n<sub>i</sub></li>
+                </ul>
+                <p style="margin-top:0.5rem; font-size:0.9rem; opacity:0.9;">
+                    Nota: Los límites variables se ajustan al tamaño de muestra de cada día, lo que da mayor precisión cuando n fluctúa.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- ✅ FIN DE IDENTIFICACIÓN -->
+
+
+    <!-- ================================================================ -->
+    <!-- 03. DESARROLLO EN EXCEL                                          -->
+    <!-- ================================================================ -->
+    <div class="tool-block" style="margin-bottom: 2rem;">
+        <div class="tool-header xl">
+            <div class="tool-badge" style="background: #2ecc71; color: #fff;">03</div>
+            <div>
+                <div class="tool-name">Desarrollo en Excel</div>
+                <div class="tool-sub">Cálculo de tasas y límites variables (por día)</div>
             </div>
         </div>
         <div style="padding: 1.5rem; background: var(--white);">
 
+            <!-- Tabla de cálculos -->
+            <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin-bottom:0.8rem;">📊 Cálculo de tasas y límites variables</h4>
             <div style="overflow-x: auto; margin-bottom: 1.5rem;">
                 <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem; text-align: center;">
                     <thead>
                         <tr style="border-bottom: 2px solid var(--rule); background: rgba(0,0,0,0.1);">
-                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">Muestra</th>
-                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">Media (X̄)</th>
-                            <th style="padding: 8px; color: var(--ink);">Rango (R)</th>
+                            <th style="padding: 6px; color: var(--ink); border-right: 1px solid var(--rule);">Día</th>
+                            <th style="padding: 6px; color: var(--ink); border-right: 1px solid var(--rule);">n</th>
+                            <th style="padding: 6px; color: var(--ink); border-right: 1px solid var(--rule);">Errores</th>
+                            <th style="padding: 6px; color: var(--ink); border-right: 1px solid var(--rule);">u = err/n</th>
+                            <th style="padding: 6px; color: var(--ink); border-right: 1px solid var(--rule);">LCI (variable)</th>
+                            <th style="padding: 6px; color: var(--ink); border-right: 1px solid var(--rule);">LCS (variable)</th>
+                            <th style="padding: 6px; color: var(--ink);">¿Fuera de control?</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>1</td><td>1.4003</td><td>0.042</td></tr>
-                        <tr><td>2</td><td>1.3935</td><td>0.030</td></tr>
-                        <tr><td>3</td><td>1.3920</td><td>0.014</td></tr>
-                        <tr><td>4</td><td>1.4023</td><td>0.033</td></tr>
-                        <tr><td>5</td><td>1.3900</td><td>0.015</td></tr>
-                        <tr><td>6</td><td>1.4040</td><td>0.004</td></tr>
-                        <tr><td>7</td><td>1.3993</td><td>0.023</td></tr>
-                        <tr><td>8</td><td>1.3950</td><td>0.028</td></tr>
-                        <tr><td>9</td><td>1.4003</td><td>0.023</td></tr>
-                        <tr><td>10</td><td>1.4068</td><td>0.022</td></tr>
-                        <tr><td>11</td><td>1.3990</td><td>0.015</td></tr>
-                        <tr><td>12</td><td>1.3988</td><td>0.020</td></tr>
-                        <tr><td>13</td><td>1.3960</td><td>0.018</td></tr>
-                        <tr><td>14</td><td>1.3930</td><td>0.026</td></tr>
-                        <tr><td>15</td><td>1.3995</td><td>0.028</td></tr>
-                        <tr><td>16</td><td>1.4023</td><td>0.023</td></tr>
-                        <tr><td>17</td><td>1.4035</td><td>0.023</td></tr>
-                        <tr><td>18</td><td>1.3955</td><td>0.021</td></tr>
-                        <tr><td>19</td><td>1.3990</td><td>0.024</td></tr>
-                        <tr><td>20</td><td>1.3953</td><td>0.014</td></tr>
+                        <tr><td>1</td><td>50</td><td>3</td><td>0.0600</td><td>0</td><td>0.1727</td><td>OK</td></tr>
+                        <tr><td>2</td><td>45</td><td>2</td><td>0.0444</td><td>0</td><td>0.1785</td><td>OK</td></tr>
+                        <tr><td>3</td><td>55</td><td>4</td><td>0.0727</td><td>0</td><td>0.1676</td><td>OK</td></tr>
+                        <tr><td>4</td><td>48</td><td>3</td><td>0.0625</td><td>0</td><td>0.1749</td><td>OK</td></tr>
+                        <tr><td>5</td><td>52</td><td>2</td><td>0.0385</td><td>0</td><td>0.1706</td><td>OK</td></tr>
+                        <tr><td>6</td><td>60</td><td>5</td><td>0.0833</td><td>0</td><td>0.1633</td><td>OK</td></tr>
+                        <tr><td>7</td><td>47</td><td>3</td><td>0.0638</td><td>0</td><td>0.1761</td><td>OK</td></tr>
+                        <tr><td>8</td><td>50</td><td>4</td><td>0.0800</td><td>0</td><td>0.1727</td><td>OK</td></tr>
+                        <tr><td>9</td><td>44</td><td>2</td><td>0.0455</td><td>0</td><td>0.1798</td><td>OK</td></tr>
+                        <tr><td>10</td><td>58</td><td>5</td><td>0.0862</td><td>0</td><td>0.1650</td><td>OK</td></tr>
+                        <tr><td>11</td><td>53</td><td>3</td><td>0.0566</td><td>0</td><td>0.1696</td><td>OK</td></tr>
+                        <tr><td>12</td><td>49</td><td>2</td><td>0.0408</td><td>0</td><td>0.1738</td><td>OK</td></tr>
+                        <tr><td>13</td><td>56</td><td>4</td><td>0.0714</td><td>0</td><td>0.1667</td><td>OK</td></tr>
+                        <tr><td>14</td><td>51</td><td>3</td><td>0.0588</td><td>0</td><td>0.1716</td><td>OK</td></tr>
+                        <tr><td>15</td><td>46</td><td>2</td><td>0.0435</td><td>0</td><td>0.1773</td><td>OK</td></tr>
+                        <tr><td>16</td><td>59</td><td>6</td><td>0.1017</td><td>0</td><td>0.1641</td><td>OK</td></tr>
+                        <tr><td>17</td><td>54</td><td>3</td><td>0.0556</td><td>0</td><td>0.1686</td><td>OK</td></tr>
+                        <tr><td>18</td><td>50</td><td>3</td><td>0.0600</td><td>0</td><td>0.1727</td><td>OK</td></tr>
                     </tbody>
                     <tfoot style="font-weight: bold; background: rgba(0,0,0,0.05);">
-                        <tr><td style="border-right:1px solid var(--rule);">Promedio</td><td style="border-right:1px solid var(--rule);">X̄̄ = 1.3983</td><td>R̄ = 0.0223</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);" colspan="3">Totales:</td>
+                            <td style="border-right:1px solid var(--rule);">Σ n = 927, Σ err = 60, k = 18</td>
+                            <td style="border-right:1px solid var(--rule);">ū = 60/927 = <strong>0.0647</strong></td>
+                            <td style="border-right:1px solid var(--rule);">(límites variables)</td>
+                            <td>—</td>
+                        </tr>
                     </tfoot>
                 </table>
             </div>
 
-            <!-- NOTA ADICIONAL CON FONDO OSCURO -->
-            <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; border-left: 4px solid #f1c40f; color: #ecf0f1;">
-                <strong>📌 Nota:</strong> Los promedios se calcularon con todos los decimales; los valores mostrados están redondeados a 4 cifras.
+            <!-- Resumen de parámetros -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); border-left: 4px solid var(--py);">
+                    <h5 style="margin: 0 0 0.5rem 0; font-family: var(--font-d);">📌 Parámetros de la carta u</h5>
+                    <ul style="margin: 0; padding-left: 1.2rem; font-size:0.9rem;">
+                        <li>ū = 60 / 927 = <strong>0.0647</strong> (6.47 errores por cada 100 pedidos)</li>
+                        <li>Límites variables: LCI<sub>i</sub> = max(0, ū − 3·√(ū/n<sub>i</sub>))</li>
+                        <li>LCS<sub>i</sub> = ū + 3·√(ū/n<sub>i</sub>)</li>
+                        <li>Cada día tiene sus propios límites según su n<sub>i</sub>.</li>
+                    </ul>
+                </div>
+                <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); border-left: 4px solid var(--xl);">
+                    <h5 style="margin: 0 0 0.5rem 0; font-family: var(--font-d);">📌 Ventaja de límites variables</h5>
+                    <ul style="margin: 0; padding-left: 1.2rem; font-size:0.9rem;">
+                        <li>Los límites se ajustan al tamaño de muestra de cada día.</li>
+                        <li>Días con más pedidos tienen límites más estrechos (mayor precisión).</li>
+                        <li>Evita falsas señales por variación en n.</li>
+                    </ul>
+                </div>
             </div>
 
+            <!-- Gráfica u de Excel -->
+            <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin-bottom:0.8rem;">📈 Gráfica u generada en Excel (límites variables)</h4>
+            <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
+                <img src="preguntas/p2/excel/E1.png" alt="Gráfica u de Excel con límites variables" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
+                <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica u (límites variables) – Excel</p>
+            </div>
+
+            <!-- Verificación (fondo oscuro) -->
+            <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f;">
+                <strong>📌 Verificación Excel:</strong> Todos los puntos se encuentran dentro de los límites variables. No hay puntos fuera de control. El proceso de errores de picking está bajo control estadístico. La tasa media de errores es de 0.0647 errores por pedido (≈6.5%).
+            </div>
         </div>
     </div>
-    <!-- ✅ FIN DEL REQUERIMIENTO 02 -->
+    <!-- ✅ FIN DESARROLLO EXCEL -->
 
 
-    <!-- 
-    ████████████████████████████████████████████████████████████████████████
-    █ 03. LÍMITES DE CONTROL (X‑barra y R)
-    ████████████████████████████████████████████████████████████████████████ 
-    -->
+    <!-- ================================================================ -->
+    <!-- 04. DESARROLLO EN MINITAB                                        -->
+    <!-- ================================================================ -->
     <div class="tool-block" style="margin-bottom: 2rem;">
-        <div class="tool-header">
-            <div class="tool-badge" style="background: var(--gold); color: #fff;">03</div>
+        <div class="tool-header mt">
+            <div class="tool-badge" style="background: #6c8ebf; color: #fff;">04</div>
             <div>
-                <div class="tool-name">Límites de control</div>
-                <div class="tool-sub">Cálculo con factores para n = 4 (A₂ = 0.729, D₃ = 0, D₄ = 2.282)</div>
+                <div class="tool-name">Desarrollo en Minitab</div>
+                <div class="tool-sub">Carta u con tamaños de muestra variables</div>
             </div>
         </div>
         <div style="padding: 1.5rem; background: var(--white);">
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); border-left: 4px solid var(--py);">
-                    <h5 style="margin: 0 0 0.5rem 0; font-family: var(--font-d);">📈 Gráfica X‑barra</h5>
-                    <ul style="margin: 0; padding-left: 1.2rem; font-size:0.95rem;">
-                        <li>LCS = X̄̄ + A₂·R̄ = 1.3983 + 0.729×0.0223 = <strong>1.4145</strong></li>
-                        <li>LCI = X̄̄ − A₂·R̄ = 1.3983 − 0.729×0.0223 = <strong>1.3820</strong></li>
-                        <li>Línea central = X̄̄ = <strong>1.3983</strong></li>
-                    </ul>
-                </div>
-                <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); border-left: 4px solid var(--xl);">
-                    <h5 style="margin: 0 0 0.5rem 0; font-family: var(--font-d);">📊 Gráfica R</h5>
-                    <ul style="margin: 0; padding-left: 1.2rem; font-size:0.95rem;">
-                        <li>LCS = D₄·R̄ = 2.282×0.0223 = <strong>0.0509</strong></li>
-                        <li>LCI = D₃·R̄ = 0×0.0223 = <strong>0</strong></li>
-                        <li>Línea central = R̄ = <strong>0.0223</strong></li>
-                    </ul>
-                </div>
+            <p style="margin-bottom: 1.2rem; font-size:0.95rem; line-height:1.6;">
+                En Minitab se utilizó la opción <strong>Stat → Control Charts → Attributes charts → U Chart</strong>. Se ingresaron los datos de la siguiente manera:
+            </p>
+            <ul style="margin-bottom: 1.2rem; padding-left: 1.8rem; font-size:0.95rem;">
+                <li>Columna con los defectos (errores) para cada día.</li>
+                <li>En el campo <strong>"Subgroup sizes"</strong> se especificó la columna que contiene los tamaños de muestra (n<sub>i</sub>), lo que permite que Minitab calcule límites variables para cada día.</li>
+            </ul>
+            <p style="margin-bottom: 1.2rem; font-size:0.95rem; line-height:1.6;">
+                Con esta configuración, Minitab genera límites de control que se ajustan al tamaño de muestra de cada subgrupo, reflejando la variabilidad real del proceso.
+            </p>
+
+            <!-- Gráfica Minitab -->
+            <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
+                <img src="preguntas/p2/minitab/M1.png" alt="Gráfica u de Minitab con límites variables" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
+                <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica u (límites variables) – Minitab</p>
             </div>
 
-            <!-- VERIFICACIÓN INICIAL CON FONDO OSCURO -->
+            <!-- Verificación Minitab (fondo oscuro) -->
             <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f;">
-                <strong>⚠️ Verificación inicial:</strong> Todos los valores de X̄ (mínimo 1.390, máximo 1.4068) caen dentro de [1.3820, 1.4145]. Todos los rangos (mínimo 0.004, máximo 0.042) caen dentro de [0, 0.0509]. No hay señales de fuera de control.
+                <strong>📌 Verificación Minitab:</strong> La gráfica u con tamaños de muestra variables confirma que todos los puntos están dentro de los límites. No hay señales de inestabilidad. La tasa media de errores es 0.0647.
             </div>
 
         </div>
     </div>
-    <!-- ✅ FIN DEL REQUERIMIENTO 03 -->
-
-<!-- 
-    ████████████████████████████████████████████████████████████████████████
-    █ 04. GRÁFICAS DE CONTROL (IMÁGENES DESDE MINITAB Y EXCEL)
-    ████████████████████████████████████████████████████████████████████████ 
-    -->
-<div class="tool-block" style="margin-bottom: 2rem;">
-    <div class="tool-header">
-        <div class="tool-badge" style="background: var(--gold); color: #fff;">04</div>
-        <div>
-            <div class="tool-name">Gráficas de control</div>
-            <div class="tool-sub">Visualización de X‑barra y R con límites</div>
-        </div>
-    </div>
-    <div style="padding: 1.5rem; background: var(--white);">
-
-        <!-- ================== MINITAB ================== -->
-        <h4 style="font-family: var(--font-d); font-size: 1.1rem; color: var(--ink); margin: 0 0 1rem 0; border-left: 4px solid #6c8ebf; padding-left: 12px;">📈 Minitab</h4>
-
-        <!-- Gráfica X-barra (Minitab) -->
-        <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
-            <img src="preguntas/p2/minitab/anovaM.png" alt="Gráfica X-barra de Minitab" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
-            <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica X‑barra (Minitab)</p>
-        </div>
-
-        <!-- Gráfica R (Minitab) -->
-        <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
-            <img src="preguntas/p5/minitab/r.png" alt="Gráfica R de Minitab" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
-            <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica R (Minitab)</p>
-        </div>
-
-        <!-- ================== EXCEL ================== -->
-        <h4 style="font-family: var(--font-d); font-size: 1.1rem; color: var(--ink); margin: 2rem 0 1rem 0; border-left: 4px solid #2ecc71; padding-left: 12px;">📊 Excel</h4>
-
-        <!-- Gráfica X-barra (Excel) -->
-        <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
-            <img src="preguntas/p5/excel/xbarra.png" alt="Gráfica X-barra de Excel" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
-            <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica X‑barra (Excel)</p>
-        </div>
-
-        <!-- Gráfica R (Excel) -->
-        <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; text-align: center;">
-            <img src="preguntas/p5/excel/r.png" alt="Gráfica R de Excel" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
-            <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica R (Excel)</p>
-        </div>
-
-        <!-- INTERPRETACIÓN VISUAL CON FONDO OSCURO -->
-        <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f; margin-top: 1.5rem;">
-            <strong>📌 Interpretación visual:</strong> Ambas gráficas (Minitab y Excel) muestran que todos los puntos se encuentran dentro de los límites de control, sin patrones sistemáticos. El proceso es estable.
-        </div>
-
-    </div>
-</div>
-<!-- ✅ FIN DEL REQUERIMIENTO 04 -->
+    <!-- ✅ FIN DESARROLLO MINITAB -->
 
 
-    <!-- 
-    ████████████████████████████████████████████████████████████████████████
-    █ 05. INTERPRETACIÓN Y CONCLUSIONES
-    ████████████████████████████████████████████████████████████████████████ 
-    -->
-    <div class="tool-block" style="margin-top: 2rem; margin-bottom: 2rem;">
+    <!-- ================================================================ -->
+    <!-- 05. INTERPRETACIÓN                                               -->
+    <!-- ================================================================ -->
+    <div class="tool-block" style="margin-bottom: 2rem;">
         <div class="tool-header">
             <div class="tool-badge" style="background: var(--gold); color: #fff;">05</div>
             <div>
-                <div class="tool-name">Interpretación y conclusiones</div>
-                <div class="tool-sub">Estabilidad del proceso y recomendaciones</div>
+                <div class="tool-name">Interpretación</div>
+                <div class="tool-sub">Estabilidad del proceso y análisis de resultados</div>
+            </div>
+        </div>
+        <div style="padding: 1.5rem; background: var(--white);">
+            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+
+                <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--py);">
+                    <strong style="font-size: 1.05rem;">📊 Gráfica u</strong>
+                    <p style="margin-top: 0.5rem;">Todos los puntos (tasas diarias) se encuentran dentro de los límites de control variables. No se observan puntos fuera de control ni patrones sistemáticos. El proceso de errores de picking se considera <strong>bajo control</strong>.</p>
+                </div>
+
+                <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--xl);">
+                    <strong style="font-size: 1.05rem;">📈 Tasa media de errores</strong>
+                    <p style="margin-top: 0.5rem;">La tasa media estimada es ū = 0.0647 errores por pedido, lo que equivale a aproximadamente <strong>6.5 errores por cada 100 pedidos</strong>. Este valor es un punto de referencia para la mejora.</p>
+                </div>
+
+                <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--mt);">
+                    <strong style="font-size: 1.05rem;">✅ Cumplimiento de reglas</strong>
+                    <p style="margin-top: 0.5rem;">No se detectan violaciones de las reglas de Western Electric. El proceso opera bajo causas comunes de variación. Los límites variables han permitido un ajuste preciso a los diferentes tamaños de muestra.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- ✅ FIN INTERPRETACIÓN -->
+
+
+    <!-- ================================================================ -->
+    <!-- 06. CONCLUSIONES                                                 -->
+    <!-- ================================================================ -->
+    <div class="tool-block" style="margin-bottom: 2rem;">
+        <div class="tool-header">
+            <div class="tool-badge" style="background: var(--gold); color: #fff;">06</div>
+            <div>
+                <div class="tool-name">Conclusiones</div>
+                <div class="tool-sub">Recomendaciones finales</div>
             </div>
         </div>
         <div style="padding: 1.5rem; background: var(--white);">
 
             <div style="display: flex; flex-direction: column; gap: 1.2rem;">
-                
+
                 <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--gold);">
                     <strong style="font-size: 1.05rem;">✅ Proceso en control estadístico</strong>
-                    <p style="margin-top: 0.5rem;">Las gráficas X‑barra y R no muestran puntos fuera de los límites de control (LCS/LCI) ni patrones no aleatorios (rachas, tendencias, etc.). Por lo tanto, el proceso de producción de remaches se considera <strong>estable</strong> y la variabilidad observada es debida a causas comunes.</p>
+                    <p style="margin-top: 0.5rem;">La carta u indica que el proceso de errores de picking se encuentra <strong>bajo control</strong>. No se requieren acciones correctivas inmediatas.</p>
                 </div>
 
                 <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--xl);">
-                    <strong style="font-size: 1.05rem;">📉 Comportamiento de la media</strong>
-                    <p>La media general (X̄̄ = 1.3983 mm) y la amplitud de los límites (±0.0163 mm) indican que el proceso está centrado. No hay señales de desplazamiento en la media a lo largo de las 20 muestras.</p>
+                    <strong style="font-size: 1.05rem;">📊 Capacidad del proceso</strong>
+                    <p>La tasa media de errores es de 0.0647 por pedido. Si el objetivo de calidad es inferior a este valor, se deben implementar mejoras (ej. capacitación, mejoras en el sistema de picking) y luego monitorear la carta para verificar la reducción.</p>
                 </div>
 
                 <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--mt);">
-                    <strong style="font-size: 1.05rem;">📊 Variabilidad del proceso</strong>
-                    <p>El rango promedio (R̄ = 0.0223 mm) y el límite superior (0.0509 mm) muestran que la dispersión dentro de cada muestra es pequeña y consistente. No hay indicios de aumento en la variabilidad.</p>
+                    <strong style="font-size: 1.05rem;">🔄 Plan de acción</strong>
+                    <p>Mantener el monitoreo diario con la carta u de límites variables. Si se detectan puntos fuera de control en el futuro, investigar causas (ej. cambios en el personal, sistema de picking, etc.). Se sugiere también calcular la capacidad del proceso (Pp, Ppk) para cuantificar el desempeño.</p>
                 </div>
 
                 <div style="background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.03)); padding: 1.2rem; border-radius: var(--rad); border: 1px solid var(--gold);">
                     <strong>🏭 Recomendación operativa</strong>
-                    <p style="margin-top: 0.5rem;">El proceso está bajo control y puede continuar su operación normal. Se sugiere mantener el plan de muestreo (cada 10 minutos) y actualizar periódicamente los límites de control a medida que se obtengan más datos. Si se desea mejorar la capacidad, se podría analizar la variabilidad entre máquinas o turnos.</p>
+                    <p style="margin-top: 0.5rem;">El proceso está bajo control. Si se desea reducir la tasa de errores, se recomienda implementar un plan de mejora (ej. estandarización de procedimientos, auditorías adicionales) y monitorear el impacto mediante la carta u.</p>
                 </div>
 
-                <!-- NOTA FINAL CON FONDO OSCURO -->
+                <!-- Cuadro adicional oscuro -->
                 <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f; margin-top: 0.5rem;">
-                    <strong>📌 Nota:</strong> Este análisis asume que los datos son independientes y la distribución es aproximadamente normal. La gráfica R es adecuada para n = 4.
+                    <strong>📌 Nota:</strong> La carta u con límites variables es la herramienta adecuada cuando el tamaño de muestra cambia. Esta aproximación proporciona límites precisos para cada día, evitando falsas alarmas por variaciones en n.
                 </div>
 
             </div>
 
         </div>
     </div>
-    <!-- ✅ FIN DEL REQUERIMIENTO 05 -->
+    <!-- ✅ FIN CONCLUSIONES -->
 
 
-    <!-- 
-    ████████████████████████████████████████████████████████████████████████
-    █ 06. COMPROBACIÓN DE RESULTADOS (CAPTURAS DE MINITAB Y EXCEL)
-    ████████████████████████████████████████████████████████████████████████ 
-    -->
+    <!-- ================================================================ -->
+    <!-- 07. COMPROBACIÓN DE RESULTADOS (ARCHIVOS DESCARGABLES)           -->
+    <!-- ================================================================ -->
     <div style="margin-bottom: 2rem; margin-top: 3rem;">
-        
-        <h3 style="font-family: var(--font-d); font-weight: 800; font-size: 1.5rem; color: var(--ink); border-left: 6px solid var(--gold); padding-left: 14px; margin-bottom: 1.5rem; text-transform: uppercase;">
-            06. Comprobación de Resultados (Capturas)
-        </h3>
 
-        <!-- ================== CAPTURAS: MINITAB ================== -->
-        <div class="tool-block">
-            <div class="tool-header mt">
-                <div class="tool-badge mt">MT</div>
+        <div class="tool-block" style="margin-bottom: 0;">
+            <div class="tool-header" style="background: transparent; border-bottom: none;">
+                <div class="tool-badge" style="background: var(--gold); color: #fff;">07</div>
                 <div>
-                    <div class="tool-name">Minitab</div>
-                    <div class="tool-sub">Gráficas de control X‑barra y R</div>
+                    <div class="tool-name">Comprobación de Resultados</div>
+                    <div class="tool-sub">Archivos de desarrollo completos en Excel y Minitab</div>
                 </div>
             </div>
-            <div class="img-grid">
-                <div class="img-cell" onclick="lbOpen(this)">
-                    <img src="preguntas/p5/minitab/xbarra.png" alt="Gráfica X-barra de Minitab" />
-                    <div class="img-cap">Gráfica X‑barra</div>
+            <div style="padding: 1.5rem; background: var(--white);">
+
+                <p style="margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.5;">
+                    A continuación, puedes descargar los archivos con la solución completa del problema, incluyendo los datos, los cálculos de tasas, los límites variables y las gráficas u generadas en cada software.
+                </p>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin: 1.5rem 0;">
+
+                    <!-- Botón descarga Excel -->
+                    <a href="preguntas/p2/excel/E2.xlsx" download="P2.xlsx" 
+                       style="background: #1e3a2f; color: #ecf0f1; padding: 1rem 2.5rem; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 0.8rem; border-left: 5px solid #2ecc71; transition: 0.2s; box-shadow: 0 4px 8px rgba(0,0,0,0.2); flex: 0 1 auto; min-width: 220px; justify-content: center;">
+                        <span style="font-size: 1.8rem;">📊</span>
+                        <span>Descargar solución en Excel<br><small style="font-weight: normal; opacity: 0.8;">(.xlsx)</small></span>
+                    </a>
+
+                    <!-- Botón descarga Minitab -->
+                    <a href="preguntas/p2/minitab/M2.mpj" download="M2.mpj" 
+                       style="background: #2c3e50; color: #ecf0f1; padding: 1rem 2.5rem; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 0.8rem; border-left: 5px solid #6c8ebf; transition: 0.2s; box-shadow: 0 4px 8px rgba(0,0,0,0.2); flex: 0 1 auto; min-width: 220px; justify-content: center;">
+                        <span style="font-size: 1.8rem;">📈</span>
+                        <span>Descargar solución en Minitab<br><small style="font-weight: normal; opacity: 0.8;">(.mpj)</small></span>
+                    </a>
+
                 </div>
-                <div class="img-cell" onclick="lbOpen(this)">
-                    <img src="preguntas/p5/minitab/r.png" alt="Gráfica R de Minitab" />
-                    <div class="img-cap">Gráfica R</div>
+
+                <!-- Cuadro informativo con fondo oscuro y borde lateral -->
+                <div style="background: #1e2a36; padding: 1rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f; margin-top: 1rem;">
+                    <strong>📌 Contenido de los archivos:</strong>
+                    <ul style="margin: 0.5rem 0 0 1.5rem; color: #ecf0f1;">
+                        <li><strong>Excel:</strong> Datos originales, tabla de tasas u<sub>i</sub>, cálculo de ū, límites variables (LCI, LCS para cada día), gráfica u con límites variables.</li>
+                        <li><strong>Minitab:</strong> Proyecto con los datos ingresados (tamaños de muestra variables), la carta u con límites variables, y el resumen de pruebas de control.</li>
+                    </ul>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">
+                        Ambos archivos contienen la solución completa y verificada del problema.
+                    </p>
                 </div>
-                <div class="img-cell" onclick="lbOpen(this)">
-                    <img src="preguntas/p5/minitab/datos.png" alt="Datos en Minitab" />
-                    <div class="img-cap">Datos</div>
-                </div>
+
+
             </div>
         </div>
-
-        <!-- ================== CAPTURAS: EXCEL ================== -->
-        <div class="tool-block" style="margin-top: 1.5rem;">
-            <div class="tool-header xl">
-                <div class="tool-badge xl">XL</div>
-                <div>
-                    <div class="tool-name">Excel</div>
-                    <div class="tool-sub">Gráficas de control X‑barra y R</div>
-                </div>
-            </div>
-            <div class="img-grid">
-                <div class="img-cell" onclick="lbOpen(this)">
-                    <img src="preguntas/p5/excel/xbarra.png" alt="Gráfica X-barra de Excel" />
-                    <div class="img-cap">Gráfica X‑barra</div>
-                </div>
-                <div class="img-cell" onclick="lbOpen(this)">
-                    <img src="preguntas/p5/excel/r.png" alt="Gráfica R de Excel" />
-                    <div class="img-cap">Gráfica R</div>
-                </div>
-                <div class="img-cell" onclick="lbOpen(this)">
-                    <img src="preguntas/p5/excel/datos.png" alt="Datos en Excel" />
-                    <div class="img-cap">Datos</div>
-                </div>
-            </div>
-        </div>
-
     </div>
-    <!-- ✅ FIN DEL REQUERIMIENTO 06 -->
+    <!-- ✅ FIN DE COMPROBACIÓN DE RESULTADOS -->
 
 </div>

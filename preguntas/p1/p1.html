@@ -1,13 +1,13 @@
-<div class="prob-panel active" id="p5">
+<div class="prob-panel active" id="p1">
 
     <!-- 
     ========================================================================
-    PROBLEMA 5: GRÁFICAS DE CONTROL PARA LONGITUD DE REMACHES
+    PROBLEMA 1: TIEMPO DE PICKING EN BANDA DE PREPARACIÓN DE PEDIDOS (AMAZON)
     ======================================================================== 
     -->
     <div class="prob-head">
         <div class="prob-tag">Problema 01</div>
-        <h2 class="prob-title">Gráficas de Control X‑barra y R – Remaches de acero</h2>
+        <h2 class="prob-title">Gráficas de Control X‑barra y R – Tiempo de picking (n=5)</h2>
     </div>
     <!-- ✅ FIN DE LA CABECERA -->
 
@@ -25,54 +25,47 @@
         </div>
         <div style="padding: 1.5rem; background: var(--white);">
             <p style="margin-bottom: 1.2rem; font-size: 0.95rem; line-height: 1.5;">
-                <strong>📌 Enunciado:</strong> En una corrida de producción se extrajeron 20 muestras de los resultados de una máquina que produce remaches de acero para la construcción industrial. Las muestras se tomaron a intervalos de 10 minutos, y cada una consistía en n = 4 remaches, cuyas longitudes (en mm) fueron medidas. El objetivo es verificar si el proceso se encuentra en control estadístico mediante gráficas de control X‑barra y R.
+                <strong>📌 Enunciado:</strong> En un centro de distribución de Amazon, el tiempo que tarda un operador (o robot colaborativo) en completar el "picking" de un pedido estándar es un indicador crítico de productividad. El estándar operativo establece un tiempo objetivo de 45 segundos por pedido. Cada hora se cronometran 5 pedidos consecutivos. Se registraron 12 subgrupos durante un turno.
             </p>
             
             <div style="overflow-x: auto; margin-bottom: 1.8rem;">
                 <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem;">
                     <thead>
                         <tr style="border-bottom: 1px solid var(--rule); background: rgba(0,0,0,0.2);">
-                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Muestra</th>
-                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Item 1</th>
-                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Item 2</th>
-                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Item 3</th>
-                            <th style="padding: 10px; text-align: center; color: var(--ink);">Item 4</th>
+                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">Subgrupo</th>
+                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">X1</th>
+                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">X2</th>
+                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">X3</th>
+                            <th style="padding: 10px; text-align: center; color: var(--ink); border-right: 1px solid var(--rule);">X4</th>
+                            <th style="padding: 10px; text-align: center; color: var(--ink);">X5</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">1</td><td>1.405</td><td>1.419</td><td>1.377</td><td>1.400</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">2</td><td>1.407</td><td>1.397</td><td>1.377</td><td>1.393</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">3</td><td>1.385</td><td>1.392</td><td>1.399</td><td>1.392</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">4</td><td>1.386</td><td>1.419</td><td>1.387</td><td>1.417</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">5</td><td>1.382</td><td>1.391</td><td>1.390</td><td>1.397</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">6</td><td>1.404</td><td>1.406</td><td>1.404</td><td>1.402</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">7</td><td>1.409</td><td>1.386</td><td>1.399</td><td>1.403</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">8</td><td>1.399</td><td>1.382</td><td>1.389</td><td>1.410</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">9</td><td>1.408</td><td>1.411</td><td>1.394</td><td>1.388</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">10</td><td>1.399</td><td>1.421</td><td>1.400</td><td>1.407</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">11</td><td>1.394</td><td>1.397</td><td>1.396</td><td>1.409</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">12</td><td>1.409</td><td>1.389</td><td>1.398</td><td>1.399</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">13</td><td>1.405</td><td>1.387</td><td>1.399</td><td>1.393</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">14</td><td>1.390</td><td>1.410</td><td>1.388</td><td>1.384</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">15</td><td>1.393</td><td>1.403</td><td>1.387</td><td>1.415</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">16</td><td>1.413</td><td>1.390</td><td>1.395</td><td>1.411</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">17</td><td>1.410</td><td>1.415</td><td>1.392</td><td>1.397</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">18</td><td>1.407</td><td>1.386</td><td>1.396</td><td>1.393</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">19</td><td>1.411</td><td>1.406</td><td>1.392</td><td>1.387</td></tr>
-                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">20</td><td>1.404</td><td>1.396</td><td>1.391</td><td>1.390</td></tr>
+                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">1</td><td>44</td><td>46</td><td>45</td><td>43</td><td>47</td></tr>
+                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">2</td><td>45</td><td>44</td><td>46</td><td>45</td><td>44</td></tr>
+                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">3</td><td>46</td><td>45</td><td>47</td><td>44</td><td>46</td></tr>
+                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">4</td><td>43</td><td>45</td><td>44</td><td>46</td><td>45</td></tr>
+                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">5</td><td>45</td><td>46</td><td>44</td><td>45</td><td>44</td></tr>
+                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">6</td><td>47</td><td>46</td><td>48</td><td>45</td><td>47</td></tr>
+                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">7</td><td>44</td><td>43</td><td>45</td><td>44</td><td>42</td></tr>
+                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">8</td><td>46</td><td>45</td><td>47</td><td>46</td><td>45</td></tr>
+                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">9</td><td>45</td><td>44</td><td>46</td><td>45</td><td>46</td></tr>
+                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">10</td><td>48</td><td>47</td><td>49</td><td>48</td><td>46</td></tr>
+                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">11</td><td>44</td><td>45</td><td>43</td><td>44</td><td>45</td></tr>
+                        <tr><td style="padding:6px; border-right:1px solid var(--rule);">12</td><td>46</td><td>47</td><td>45</td><td>46</td><td>44</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <h3 style="font-family: var(--font-d); font-weight: 700; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; border-left: 4px solid var(--gold); padding-left: 12px;">🎯 Objetivo del análisis</h3>
-            <p style="margin-bottom: 1.2rem;">Evaluar la estabilidad del proceso de producción de remaches mediante gráficas de control <strong>X‑barra</strong> (media) y <strong>R</strong> (rango). Se determinará si el proceso está en control estadístico y si la variabilidad es aceptable.</p>
+            <p style="margin-bottom: 1.2rem;">Determinar si el proceso de picking se encuentra en control estadístico y si el tiempo promedio se ajusta al estándar de 45 segundos, utilizando una carta de control apropiada para subgrupos de tamaño n=5.</p>
 
             <h3 style="font-family: var(--font-d); font-weight: 700; font-size: 1.2rem; margin: 1.2rem 0 0.5rem 0; border-left: 4px solid var(--gold); padding-left: 12px;">📐 Parámetros del diseño</h3>
             <ul style="margin-bottom: 0; padding-left: 1.8rem;">
-                <li><strong>Tamaño de muestra:</strong> n = 4 remaches por muestra.</li>
-                <li><strong>Número de muestras:</strong> k = 20.</li>
-                <li><strong>Variable de interés:</strong> Longitud del remache (mm).</li>
-                <li><strong>Límites de control:</strong> Basados en el rango promedio (R̄).</li>
+                <li><strong>Tamaño de subgrupo:</strong> n = 5 observaciones por hora.</li>
+                <li><strong>Número de subgrupos:</strong> k = 12.</li>
+                <li><strong>Variable de interés:</strong> Tiempo de picking (segundos).</li>
+                <li><strong>Valor objetivo:</strong> 45 segundos (estándar operativo).</li>
             </ul>
         </div>
     </div>
@@ -87,24 +80,26 @@
             <div class="tool-badge" style="background: var(--gold); color: #fff;">02</div>
             <div>
                 <div class="tool-name">Identificación de la carta</div>
-                <div class="tool-sub">Tipo de gráfica y factores</div>
+                <div class="tool-sub">Justificación de la elección (Xbarra-R vs Xbarra-S)</div>
             </div>
         </div>
         <div style="padding: 1.5rem; background: var(--white);">
             <p style="margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.6;">
-                Se utiliza una <strong>carta de control X‑barra y R</strong> para variables continuas, apropiada para monitorear la media y la variabilidad de un proceso cuando se dispone de subgrupos de tamaño fijo (n = 4). Los límites de control se calculan a partir del rango promedio (R̄) y los factores constantes para n = 4:
+                Para subgrupos de tamaño <strong>n = 5</strong>, la carta de control recomendada es la <strong>X‑barra y R</strong> (medias y rangos). La elección se justifica por los siguientes motivos:
             </p>
             <ul style="margin-bottom: 1rem; padding-left: 1.8rem; font-size:0.95rem;">
-                <li><strong>A₂ = 0.729</strong> (para límites de X‑barra)</li>
-                <li><strong>D₃ = 0</strong> (límite inferior para R)</li>
-                <li><strong>D₄ = 2.282</strong> (límite superior para R)</li>
+                <li><strong>n = 5 es pequeño</strong> (≤ 8). Para tamaños de subgrupo pequeños, el rango (R) es un estimador eficiente de la variabilidad y es fácil de calcular.</li>
+                <li><strong>La carta X‑barra y R</strong> es la más utilizada en la práctica para n entre 2 y 8, y los factores constantes (A₂, D₃, D₄) están tabulados para estos tamaños.</li>
+                <li><strong>La carta X‑barra y S</strong> (desviación estándar) es más apropiada cuando n ≥ 10, ya que la desviación estándar es un estimador más preciso para muestras grandes. Para n=5, la pérdida de eficiencia del rango es pequeña y la carta R es más simple de implementar.</li>
             </ul>
             <!-- Cuadro adicional con fondo oscuro -->
             <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; border-left: 4px solid #f1c40f; color: #ecf0f1;">
-                <strong>📌 Fórmulas empleadas:</strong>
+                <strong>📌 Constantes para n=5:</strong>
                 <ul style="margin:0.5rem 0 0 1.5rem; color: #ecf0f1;">
-                    <li><strong>X̄‑barra:</strong> LCS = X̄̄ + A₂·R̄ &nbsp;|&nbsp; LCI = X̄̄ − A₂·R̄ &nbsp;|&nbsp; Central = X̄̄</li>
-                    <li><strong>R:</strong> LCS = D₄·R̄ &nbsp;|&nbsp; LCI = D₃·R̄ &nbsp;|&nbsp; Central = R̄</li>
+                    <li><strong>A₂ = 0.577</strong> (para límites de X‑barra)</li>
+                    <li><strong>D₃ = 0</strong> (límite inferior para R)</li>
+                    <li><strong>D₄ = 2.114</strong> (límite superior para R)</li>
+                    <li><strong>d₂ = 2.326</strong> (para estimar sigma a partir de R̄)</li>
                 </ul>
             </div>
         </div>
@@ -120,72 +115,69 @@
             <div class="tool-badge" style="background: #2ecc71; color: #fff;">03</div>
             <div>
                 <div class="tool-name">Desarrollo en Excel</div>
-                <div class="tool-sub">Cálculo de estadísticos, límites y gráfica</div>
+                <div class="tool-sub">Cálculo de estadísticos, límites y gráficas X‑barra y R</div>
             </div>
         </div>
         <div style="padding: 1.5rem; background: var(--white);">
 
             <!-- Tabla de estadísticos -->
-            <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin-bottom:0.8rem;">📊 Estadísticos muestrales</h4>
+            <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin-bottom:0.8rem;">📊 Estadísticos muestrales por subgrupo</h4>
             <div style="overflow-x: auto; margin-bottom: 1.5rem;">
                 <table style="width: 100%; border-collapse: collapse; background: var(--bg); border: 2px solid var(--rule); font-family: var(--font-m); font-size: 0.85rem; text-align: center;">
                     <thead>
                         <tr style="border-bottom: 2px solid var(--rule); background: rgba(0,0,0,0.1);">
-                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">Muestra</th>
+                            <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">Subgrupo</th>
                             <th style="padding: 8px; color: var(--ink); border-right: 1px solid var(--rule);">Media (X̄)</th>
                             <th style="padding: 8px; color: var(--ink);">Rango (R)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>1</td><td>1.4003</td><td>0.042</td></tr>
-                        <tr><td>2</td><td>1.3935</td><td>0.030</td></tr>
-                        <tr><td>3</td><td>1.3920</td><td>0.014</td></tr>
-                        <tr><td>4</td><td>1.4023</td><td>0.033</td></tr>
-                        <tr><td>5</td><td>1.3900</td><td>0.015</td></tr>
-                        <tr><td>6</td><td>1.4040</td><td>0.004</td></tr>
-                        <tr><td>7</td><td>1.3993</td><td>0.023</td></tr>
-                        <tr><td>8</td><td>1.3950</td><td>0.028</td></tr>
-                        <tr><td>9</td><td>1.4003</td><td>0.023</td></tr>
-                        <tr><td>10</td><td>1.4068</td><td>0.022</td></tr>
-                        <tr><td>11</td><td>1.3990</td><td>0.015</td></tr>
-                        <tr><td>12</td><td>1.3988</td><td>0.020</td></tr>
-                        <tr><td>13</td><td>1.3960</td><td>0.018</td></tr>
-                        <tr><td>14</td><td>1.3930</td><td>0.026</td></tr>
-                        <tr><td>15</td><td>1.3995</td><td>0.028</td></tr>
-                        <tr><td>16</td><td>1.4023</td><td>0.023</td></tr>
-                        <tr><td>17</td><td>1.4035</td><td>0.023</td></tr>
-                        <tr><td>18</td><td>1.3955</td><td>0.021</td></tr>
-                        <tr><td>19</td><td>1.3990</td><td>0.024</td></tr>
-                        <tr><td>20</td><td>1.3953</td><td>0.014</td></tr>
+                        <tr><td>1</td><td>45.0</td><td>4</td></tr>
+                        <tr><td>2</td><td>44.8</td><td>2</td></tr>
+                        <tr><td>3</td><td>45.6</td><td>3</td></tr>
+                        <tr><td>4</td><td>44.6</td><td>3</td></tr>
+                        <tr><td>5</td><td>44.8</td><td>2</td></tr>
+                        <tr><td>6</td><td>46.6</td><td>3</td></tr>
+                        <tr><td>7</td><td>43.6</td><td>3</td></tr>
+                        <tr><td>8</td><td>45.8</td><td>2</td></tr>
+                        <tr><td>9</td><td>45.2</td><td>2</td></tr>
+                        <tr><td>10</td><td>47.6</td><td>3</td></tr>
+                        <tr><td>11</td><td>44.2</td><td>2</td></tr>
+                        <tr><td>12</td><td>45.6</td><td>3</td></tr>
                     </tbody>
                     <tfoot style="font-weight: bold; background: rgba(0,0,0,0.05);">
-                        <tr><td style="border-right:1px solid var(--rule);">Promedio</td><td style="border-right:1px solid var(--rule);">X̄̄ = 1.3983</td><td>R̄ = 0.0223</td></tr>
+                        <tr><td style="border-right:1px solid var(--rule);">Promedio</td><td style="border-right:1px solid var(--rule);">X̄̄ = 45.28</td><td>R̄ = 2.667</td></tr>
                     </tfoot>
                 </table>
             </div>
 
             <!-- Límites de control -->
-            <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin-bottom:0.8rem;">📐 Límites de control</h4>
+            <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin-bottom:0.8rem;">📐 Límites de control (X‑barra y R)</h4>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
                 <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); border-left: 4px solid var(--py);">
                     <h5 style="margin: 0 0 0.5rem 0; font-family: var(--font-d);">X‑barra</h5>
                     <ul style="margin: 0; padding-left: 1.2rem; font-size:0.9rem;">
-                        <li>LCS = 1.3983 + 0.729×0.0223 = <strong>1.4145</strong></li>
-                        <li>LCI = 1.3983 − 0.729×0.0223 = <strong>1.3820</strong></li>
-                        <li>Central = <strong>1.3983</strong></li>
+                        <li>LCS = X̄̄ + A₂·R̄ = 45.28 + 0.577×2.667 = <strong>46.82</strong></li>
+                        <li>LCI = X̄̄ − A₂·R̄ = 45.28 − 0.577×2.667 = <strong>43.74</strong></li>
+                        <li>Central = <strong>45.28</strong></li>
                     </ul>
                 </div>
                 <div style="background: var(--bg); padding: 1rem; border-radius: var(--rad); border-left: 4px solid var(--xl);">
                     <h5 style="margin: 0 0 0.5rem 0; font-family: var(--font-d);">R</h5>
                     <ul style="margin: 0; padding-left: 1.2rem; font-size:0.9rem;">
-                        <li>LCS = 2.282×0.0223 = <strong>0.0509</strong></li>
-                        <li>LCI = 0×0.0223 = <strong>0</strong></li>
-                        <li>Central = <strong>0.0223</strong></li>
+                        <li>LCS = D₄·R̄ = 2.114×2.667 = <strong>5.64</strong></li>
+                        <li>LCI = D₃·R̄ = 0×2.667 = <strong>0</strong></li>
+                        <li>Central = <strong>2.667</strong></li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Gráfica Excel (grande) -->
+            <!-- Estimación de sigma (opcional) -->
+            <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f; margin-bottom: 1.5rem;">
+                <strong>📌 Estimación de la desviación estándar:</strong> σ̂ = R̄ / d₂ = 2.667 / 2.326 = <strong>1.147</strong> segundos.
+            </div>
+
+            <!-- Gráficas Excel -->
             <h4 style="font-family: var(--font-d); font-size: 1.05rem; color: var(--ink); margin-bottom:0.8rem;">📈 Gráficas generadas en Excel</h4>
             <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
                 <img src="preguntas/p1/excel/E1.png" alt="Gráfica X-barra de Excel" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
@@ -196,11 +188,9 @@
                 <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica R (Excel)</p>
             </div>
 
-
-
-            <!-- Cuadro adicional oscuro -->
+            <!-- Verificación Excel (fondo oscuro) -->
             <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f;">
-                <strong>📌 Verificación Excel:</strong> Todos los puntos caen dentro de los límites. El proceso se encuentra en control estadístico.
+                <strong>📌 Verificación Excel:</strong> Se detectan dos puntos fuera de control en la gráfica X‑barra: <strong>subgrupo 7</strong> (media 43.6 por debajo del LCI 43.74) y <strong>subgrupo 10</strong> (media 47.6 por encima del LCS 46.82). En la gráfica R todos los puntos están dentro de los límites.
             </div>
         </div>
     </div>
@@ -221,21 +211,19 @@
         <div style="padding: 1.5rem; background: var(--white);">
 
             <p style="margin-bottom: 1.2rem; font-size:0.95rem; line-height:1.6;">
-                En Minitab se utilizó la opción <strong>Stat → Control Charts → Variables charts for subgroups → Xbar‑R</strong>. Se introdujeron los datos de las 20 muestras (cada una con 4 observaciones) y se obtuvieron las siguientes gráficas:
+                En Minitab se utilizó la opción <strong>Stat → Control Charts → Variables charts for subgroups → Xbar‑R</strong>. Se introdujeron los datos de los 12 subgrupos (cada uno con 5 observaciones) y se obtuvieron las siguientes gráficas:
             </p>
 
-            <!-- Gráfica Minitab (grande) -->
+            <!-- Gráfica Minitab -->
             <div style="background: #f8f9fa; border: 2px dashed #aaa; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
                 <img src="preguntas/p1/minitab/M1.png" alt="Gráfica X-barra y R de Minitab" style="width: 100%; max-width: 900px; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
                 <p style="margin: 0.5rem 0 0 0; font-family: monospace; color: #555; font-size: 0.9rem;">Gráfica X‑barra y R (Minitab)</p>
             </div>
 
-            <!-- Cuadro adicional oscuro -->
+            <!-- Verificación Minitab (fondo oscuro) -->
             <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f;">
-                <strong>📌 Verificación Minitab:</strong> Los límites coinciden con los calculados manualmente (LCS X̄=1.4145, LCI X̄=1.3820; LCS R=0.0509). No hay puntos fuera de control ni patrones especiales.
+                <strong>📌 Verificación Minitab:</strong> Los límites coinciden con los calculados (LCS X̄=46.82, LCI X̄=43.74; LCS R=5.64, LCI R=0). Minitab señala los subgrupos 7 y 10 como fuera de control en la gráfica X‑barra, confirmando la inestabilidad del proceso.
             </div>
-
-            <!-- Capturas adicionales (opcional) -->
 
         </div>
     </div>
@@ -250,23 +238,27 @@
             <div class="tool-badge" style="background: var(--gold); color: #fff;">05</div>
             <div>
                 <div class="tool-name">Interpretación</div>
-                <div class="tool-sub">Análisis de la estabilidad del proceso</div>
+                <div class="tool-sub">Estabilidad del proceso y ajuste al estándar</div>
             </div>
         </div>
         <div style="padding: 1.5rem; background: var(--white);">
             <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+
                 <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--py);">
                     <strong style="font-size: 1.05rem;">📊 Gráfica X‑barra</strong>
-                    <p style="margin-top: 0.5rem;">La media de cada subgrupo oscila entre 1.390 y 1.4068, valores que se mantienen dentro de los límites de control [1.3820, 1.4145]. No se observan tendencias, ciclos ni puntos fuera de los límites. Esto indica que la media del proceso es estable y no ha sufrido desplazamientos significativos durante el periodo de muestreo.</p>
+                    <p style="margin-top: 0.5rem;">Se observan dos puntos fuera de control: el <strong>subgrupo 7</strong> (media 43.6, por debajo del LCI 43.74) y el <strong>subgrupo 10</strong> (media 47.6, por encima del LCS 46.82). Esto indica que la media del proceso no es estable; existen causas especiales que afectan el tiempo de picking en esas horas específicas.</p>
                 </div>
+
                 <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--xl);">
                     <strong style="font-size: 1.05rem;">📉 Gráfica R</strong>
-                    <p style="margin-top: 0.5rem;">Los rangos varían entre 0.004 y 0.042, todos por debajo del límite superior (0.0509) y por encima del límite inferior (0). No hay señales de aumento en la variabilidad, lo que sugiere que la dispersión del proceso es consistente y controlada.</p>
+                    <p style="margin-top: 0.5rem;">Todos los rangos se encuentran dentro de los límites [0, 5.64], lo que sugiere que la variabilidad dentro de cada hora es consistente y no hay señales de aumento o disminución inusual.</p>
                 </div>
+
                 <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--mt);">
-                    <strong style="font-size: 1.05rem;">✅ Cumplimiento de reglas</strong>
-                    <p style="margin-top: 0.5rem;">No se detectan violaciones de las reglas de Western Electric (puntos fuera de los límites, rachas de 7 puntos consecutivos por encima o debajo de la central, etc.). El proceso opera bajo causas comunes de variación.</p>
+                    <strong style="font-size: 1.05rem;">📏 Ajuste al estándar de 45 segundos</strong>
+                    <p style="margin-top: 0.5rem;">La media global (45.28 s) es muy cercana al objetivo de 45 s, pero dado que el proceso no está bajo control, <strong>no se puede afirmar que el proceso esté ajustado al estándar</strong>. Se deben investigar las causas de los puntos fuera de control (subgrupos 7 y 10) y estabilizar el proceso antes de evaluar la capacidad.</p>
                 </div>
+
             </div>
         </div>
     </div>
@@ -287,26 +279,32 @@
         <div style="padding: 1.5rem; background: var(--white);">
 
             <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+
                 <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--gold);">
-                    <strong style="font-size: 1.05rem;">🔍 Estabilidad confirmada</strong>
-                    <p style="margin-top: 0.5rem;">Ambas cartas de control (X‑barra y R) indican que el proceso de producción de remaches se encuentra <strong>en control estadístico</strong>. No se requiere ninguna acción correctiva inmediata.</p>
+                    <strong style="font-size: 1.05rem;">⚠️ Proceso no estable</strong>
+                    <p style="margin-top: 0.5rem;">La presencia de puntos fuera de control en la gráfica X‑barra indica que el proceso de picking no está bajo control. Se deben identificar y eliminar las causas especiales que afectan los subgrupos 7 y 10.</p>
                 </div>
+
                 <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--xl);">
-                    <strong style="font-size: 1.05rem;">📏 Capacidad del proceso</strong>
-                    <p>La media general (1.3983 mm) y la variabilidad (R̄ = 0.0223) son consistentes. Se recomienda calcular los índices de capacidad (Cp, Cpk) para evaluar si el proceso cumple con las especificaciones técnicas.</p>
+                    <strong style="font-size: 1.05rem;">🔍 Investigación de causas</strong>
+                    <p>Revisar qué ocurrió en las horas correspondientes a los subgrupos 7 y 10: ¿cambios en el personal, fallas en el sistema, pedidos atípicos, etc.? Eliminar la causa y observar si el proceso se estabiliza.</p>
                 </div>
+
                 <div style="background: var(--bg); padding: 1.2rem; border-radius: var(--rad); border-left: 4px solid var(--mt);">
-                    <strong style="font-size: 1.05rem;">🔄 Plan de acción</strong>
-                    <p>Mantener el esquema de muestreo actual (cada 10 minutos, n=4). Actualizar los límites de control periódicamente (cada 25-30 muestras) para reflejar posibles mejoras o cambios en el proceso.</p>
+                    <strong style="font-size: 1.05rem;">📈 Acción futura</strong>
+                    <p>Una vez eliminadas las causas especiales, se deben recalcular los límites de control y verificar nuevamente la estabilidad. Solo entonces se podrá evaluar la capacidad del proceso y su alineación con el objetivo de 45 segundos.</p>
                 </div>
+
                 <div style="background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.03)); padding: 1.2rem; border-radius: var(--rad); border: 1px solid var(--gold);">
                     <strong>🏭 Recomendación operativa</strong>
-                    <p style="margin-top: 0.5rem;">El proceso está bajo control y puede continuar su operación normal. Se sugiere mantener el plan de muestreo (cada 10 minutos) y actualizar periódicamente los límites de control a medida que se obtengan más datos. Si se desea mejorar la capacidad, se podría analizar la variabilidad entre máquinas o turnos.</p>
+                    <p style="margin-top: 0.5rem;">Mantener el muestreo horario con n=5 y actualizar los límites una vez que el proceso esté estable. Capacitar al equipo en la identificación de causas especiales y en el uso de cartas de control para la mejora continua.</p>
                 </div>
+
                 <!-- Cuadro adicional oscuro -->
                 <div style="background: #1e2a36; padding: 0.8rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f; margin-top: 0.5rem;">
-                    <strong>📌 Nota:</strong> Este análisis asume que los datos son independientes y la distribución es aproximadamente normal. La gráfica R es adecuada para n = 4.
+                    <strong>📌 Nota:</strong> La carta X‑barra y R es adecuada para n=5. Si después de la estabilización se desea mayor precisión en la estimación de la variabilidad, se podría considerar el uso de X‑barra y S (aunque para n=5 la diferencia es mínima).
                 </div>
+
             </div>
 
         </div>
@@ -318,7 +316,6 @@
     <!-- 07. COMPROBACIÓN DE RESULTADOS (ARCHIVOS DESCARGABLES)           -->
     <!-- ================================================================ -->
     <div style="margin-bottom: 2rem; margin-top: 3rem;">
-
 
         <div class="tool-block" style="margin-bottom: 0;">
             <div class="tool-header" style="background: transparent; border-bottom: none;">
@@ -337,14 +334,14 @@
                 <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin: 1.5rem 0;">
 
                     <!-- Botón descarga Excel -->
-                    <a href="preguntas/p1/excel/Libro2.xlsx" download="Solucion_Control_Remaches_Excel.xlsx" 
+                    <a href="preguntas/p1/excel/E1.xlsx" download="P1.xlsx" 
                        style="background: #1e3a2f; color: #ecf0f1; padding: 1rem 2.5rem; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 0.8rem; border-left: 5px solid #2ecc71; transition: 0.2s; box-shadow: 0 4px 8px rgba(0,0,0,0.2); flex: 0 1 auto; min-width: 220px; justify-content: center;">
                         <span style="font-size: 1.8rem;">📊</span>
                         <span>Descargar solución en Excel<br><small style="font-weight: normal; opacity: 0.8;">(.xlsx)</small></span>
                     </a>
 
-                    <!-- Botón descarga Minitab (puede ser .MPJ, .MTW o .PDF) -->
-                    <a href="preguntas/p1/minitab/Minitab.mpj" download="Solucion_Control_Remaches_Minitab.mpj" 
+                    <!-- Botón descarga Minitab -->
+                    <a href="preguntas/p1/minitab/M1.mpj" download="P2.mpj" 
                        style="background: #2c3e50; color: #ecf0f1; padding: 1rem 2.5rem; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 0.8rem; border-left: 5px solid #6c8ebf; transition: 0.2s; box-shadow: 0 4px 8px rgba(0,0,0,0.2); flex: 0 1 auto; min-width: 220px; justify-content: center;">
                         <span style="font-size: 1.8rem;">📈</span>
                         <span>Descargar solución en Minitab<br><small style="font-weight: normal; opacity: 0.8;">(.mpj)</small></span>
@@ -356,7 +353,7 @@
                 <div style="background: #1e2a36; padding: 1rem; border-radius: 8px; color: #ecf0f1; border-left: 4px solid #f1c40f; margin-top: 1rem;">
                     <strong>📌 Contenido de los archivos:</strong>
                     <ul style="margin: 0.5rem 0 0 1.5rem; color: #ecf0f1;">
-                        <li><strong>Excel:</strong> Datos originales, tabla de medias y rangos, límites de control calculados, gráficas X‑barra y R con todos los formatos.</li>
+                        <li><strong>Excel:</strong> Datos originales, tabla de medias y rangos, límites de control, gráficas X‑barra y R, estimación de sigma.</li>
                         <li><strong>Minitab:</strong> Proyecto con los datos ingresados, las gráficas de control (X‑barra y R) y los resultados estadísticos.</li>
                     </ul>
                     <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">
@@ -364,7 +361,7 @@
                     </p>
                 </div>
 
-
+    
 
             </div>
         </div>
